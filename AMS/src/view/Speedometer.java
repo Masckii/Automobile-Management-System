@@ -67,7 +67,7 @@ public class Speedometer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        
+        //moamen
 
     }//GEN-LAST:event_jPanel1MouseClicked
 
