@@ -10,6 +10,6 @@ package Model;
  *
  * @author moamen
  */
-public class monitor {
+public class Monitor {
     
 }

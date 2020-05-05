@@ -11,5 +11,8 @@ package Model;
  * @author moamen
  */
 public class AutoMobileManagmentSystem {
-    
+   public CruiseControl c1;
+   public Monitor m;
+   public DriveShaftSensor dss;
+    public  SystemStateTracer sst;
 }
