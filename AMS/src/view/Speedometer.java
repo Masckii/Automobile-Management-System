@@ -79,7 +79,7 @@ public class Speedometer extends javax.swing.JFrame {
          g.drawLine(100, 150, 200, 150);
          
          g.setColor(Color.red);
-         g.drawLine(150, -2, 105, 0);
+         g.drawLine(150, 0, 105, 0);
          
          
          g.setColor(Color.blue);
