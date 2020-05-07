@@ -9,11 +9,11 @@ package events;
  *
  * @author sam
  */
-public class Cruisie_con_Reading {
+public class Cruise_con_Reading {
 
     private final int value;
 
-    public Cruisie_con_Reading(int value) {
+    public Cruise_con_Reading(int value) {
         this.value = value;
     }
 
