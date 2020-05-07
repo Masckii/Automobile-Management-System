@@ -7,13 +7,8 @@ package esper;
 
 /**
  *
- * @author Omar Shan
+ * @author Omar
  */
-public class AMS {
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Config {
+    
 }
