@@ -13,8 +13,6 @@ import view.View_AMS;
  */
 public class AutoMobileManagmentSystem {
 
-
-
     //--engine
     private boolean state_engine = false;
 
@@ -24,13 +22,11 @@ public class AutoMobileManagmentSystem {
     private DriveShaftSensor dss;
     private Model.Fuel_Sensor fuel_sensor;
     private Model.Led_light led_light;
-    
-    
+
     //gui
     private view.View_AMS gui;
     //-
-    
-    
+
     public AutoMobileManagmentSystem() {
         this.cc = new CruiseController();
         this.monitor = new Monitor();
@@ -38,5 +34,12 @@ public class AutoMobileManagmentSystem {
         gui = new View_AMS();
 
     }
+
+    public boolean isEngineOn() {
+        return state_engine;
+    }
+    
+    
+    
 
 }

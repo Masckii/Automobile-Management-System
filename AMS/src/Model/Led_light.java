@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author Youssef Negm
+ * @author samir mohamed
  */
 public class Led_light {
 

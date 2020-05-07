@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Youssef Negm
+ * @author samir mohamed
  */
 public class Fuel_Sensor {
 
