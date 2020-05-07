@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package esper;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *

@@ -5,6 +5,11 @@
  */
 package esper;
 
+import com.espertech.esper.client.EPServiceProvider;
+import com.espertech.esper.client.EPServiceProviderManager;
+import com.espertech.esper.client.EPStatement;
+// Add all events classes
+
 /**
  *
  * @author Omar
