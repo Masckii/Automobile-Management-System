@@ -32,8 +32,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="displaySingle2" min="-2" max="-2" attributes="0"/>
-                          <Component id="displaySingle3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="displayGear" min="-2" max="-2" attributes="0"/>
+                          <Component id="displayRPM" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -42,26 +42,26 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="displaySingle1" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="displayCrusingSpeed" min="-2" pref="180" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="displaySingle4" min="-2" pref="168" max="-2" attributes="0"/>
+                              <Component id="displayAvgFuel" min="-2" pref="168" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="radial41" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radial22" min="-2" max="-2" attributes="0"/>
+                      <Component id="radialRPM" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="radial1Lcd1" min="-2" max="-2" attributes="0"/>
+                      <Component id="radialSpeedometer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="radialFuel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="digitalRadial1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="clock1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="117" max="32767" attributes="0"/>
+              <EmptySpace pref="149" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,26 +71,26 @@
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="radial22" max="32767" attributes="0"/>
-                      <Component id="radial41" max="32767" attributes="0"/>
+                      <Component id="radialRPM" max="32767" attributes="0"/>
                       <Component id="digitalRadial1" max="32767" attributes="0"/>
                       <Component id="clock1" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="radial1Lcd1" min="-2" max="-2" attributes="0"/>
+                  <Component id="radialFuel" min="-2" max="-2" attributes="0"/>
+                  <Component id="radialSpeedometer" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="displaySingle3" min="-2" max="-2" attributes="0"/>
+                      <Component id="displayRPM" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="displaySingle2" min="-2" max="-2" attributes="0"/>
+                      <Component id="displayGear" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="10" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="displaySingle4" max="32767" attributes="0"/>
-                          <Component id="displaySingle1" pref="61" max="32767" attributes="0"/>
+                          <Component id="displayAvgFuel" max="32767" attributes="0"/>
+                          <Component id="displayCrusingSpeed" pref="61" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
@@ -131,8 +131,8 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jButton3" min="-2" pref="103" max="-2" attributes="0"/>
-                                      <Component id="jButton2" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <Component id="buttonStopEngine" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <Component id="buttonStartEngine" min="-2" pref="103" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -148,43 +148,43 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButton1" max="32767" attributes="0"/>
-                                      <Component id="jToggleButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonStopCruise" max="32767" attributes="0"/>
+                                      <Component id="buttonStartCruise" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                              <Component id="sliderFuel" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSetFuel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jToggleButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonAccelerate" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jButton7" max="32767" attributes="0"/>
+                                          <Component id="buttonSecondGear" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                          <Component id="jButton8" max="32767" attributes="0"/>
+                                          <Component id="buttonThirdGear" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                          <Component id="jButton6" min="-2" pref="79" max="-2" attributes="0"/>
+                                          <Component id="buttonFirstGear" min="-2" pref="79" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="jButton5" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="buttonBrake" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -219,38 +219,38 @@
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonStartEngine" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonStopEngine" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonStartCruise" min="-2" max="-2" attributes="0"/>
+                                      <Component id="sliderFuel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonStopCruise" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonSetFuel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonFirstGear" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonAccelerate" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSecondGear" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonThirdGear" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonBrake" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
                       </Group>
@@ -292,20 +292,20 @@
             <Property name="text" type="java.lang.String" value="Monitor"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+        <Component class="javax.swing.JToggleButton" name="buttonStartCruise">
           <Properties>
             <Property name="text" type="java.lang.String" value="Start Cruising"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartCruiseActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="buttonStopCruise">
           <Properties>
             <Property name="text" type="java.lang.String" value="Stop Cruising"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStopCruiseActionPerformed"/>
           </Events>
         </Component>
         <Container class="eu.hansolo.lightbulb.LightBulb" name="lightBulb1">
@@ -314,20 +314,20 @@
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="buttonStartEngine">
           <Properties>
             <Property name="text" type="java.lang.String" value="Start Engine"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStartEngineActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="buttonStopEngine">
           <Properties>
             <Property name="text" type="java.lang.String" value="Stop Engine"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonStopEngineActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -346,34 +346,34 @@
             <Property name="text" type="java.lang.String" value="Set Fuel:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSlider" name="jSlider1">
+        <Component class="javax.swing.JSlider" name="sliderFuel">
           <Properties>
             <Property name="maximum" type="int" value="10"/>
             <Property name="value" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="buttonSetFuel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Set Fuel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetFuelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+        <Component class="javax.swing.JToggleButton" name="buttonAccelerate">
           <Properties>
             <Property name="text" type="java.lang.String" value="Accelerate"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAccelerateActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="buttonBrake">
           <Properties>
             <Property name="text" type="java.lang.String" value="Brake"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBrakeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -400,27 +400,27 @@
             <Property name="text" type="java.lang.String" value="Top Gear"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="buttonFirstGear">
           <Properties>
             <Property name="text" type="java.lang.String" value="First"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonFirstGearActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="buttonSecondGear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Second"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton8">
+        <Component class="javax.swing.JButton" name="buttonThirdGear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Third"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="eu.hansolo.steelseries.gauges.Radial1Lcd" name="radial1Lcd1">
+    <Component class="eu.hansolo.steelseries.gauges.Radial1Lcd" name="radialFuel">
       <Properties>
         <Property name="maxValue" type="double" value="10.0"/>
         <Property name="name" type="java.lang.String" value="Fuel" noResource="true"/>
@@ -437,24 +437,18 @@
         <Property name="unitString" type="java.lang.String" value="E/F"/>
       </Properties>
     </Component>
-    <Container class="eu.hansolo.steelseries.gauges.Radial2" name="radial22">
-      <Properties>
-        <Property name="autoscrolls" type="boolean" value="true"/>
-        <Property name="name" type="java.lang.String" value="" noResource="true"/>
-        <Property name="title" type="java.lang.String" value="Speed"/>
-        <Property name="unitString" type="java.lang.String" value="Km/h"/>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-    </Container>
-    <Container class="eu.hansolo.steelseries.gauges.Radial4" name="radial41">
+    <Container class="eu.hansolo.steelseries.gauges.Radial4" name="radialRPM">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="maxMeasuredValueVisible" type="boolean" value="true"/>
         <Property name="maxValue" type="double" value="80.0"/>
         <Property name="title" type="java.lang.String" value="RPM"/>
+        <Property name="trackRange" type="double" value="10.0"/>
+        <Property name="trackStart" type="double" value="70.0"/>
+        <Property name="trackStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="trackVisible" type="boolean" value="true"/>
         <Property name="unitString" type="java.lang.String" value="X100"/>
       </Properties>
 
@@ -462,7 +456,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displaySingle1">
+    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayCrusingSpeed">
       <Properties>
         <Property name="unitString" type="java.lang.String" value="Km/h"/>
       </Properties>
@@ -477,11 +471,12 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displaySingle2">
+    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayGear">
       <Properties>
         <Property name="lcdColor" type="eu.hansolo.steelseries.tools.LcdColor" editor="org.netbeans.modules.form.editors.EnumEditor">
           <Value id="BLACK_LCD"/>
         </Property>
+        <Property name="lcdDecimals" type="int" value="0"/>
         <Property name="unitString" type="java.lang.String" value="Gear"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
@@ -490,7 +485,7 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displaySingle3">
+    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayRPM">
       <Properties>
         <Property name="unitString" type="java.lang.String" value="RPM"/>
       </Properties>
@@ -504,7 +499,7 @@
         <Property name="text" type="java.lang.String" value="Cruising Speed"/>
       </Properties>
     </Component>
-    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displaySingle4">
+    <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayAvgFuel">
       <Properties>
         <Property name="unitString" type="java.lang.String" value="avg/fuel"/>
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
@@ -514,5 +509,12 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
+    <Component class="eu.hansolo.steelseries.gauges.Radial2Lcd" name="radialSpeedometer">
+      <Properties>
+        <Property name="lcdUnitString" type="java.lang.String" value="km/h"/>
+        <Property name="lcdUnitStringVisible" type="boolean" value="true"/>
+        <Property name="title" type="java.lang.String" value="Speed"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
