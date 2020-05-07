@@ -16,7 +16,8 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    
+         // Create Ams
+
       final  model.AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
     public static void main(String[] args) {
         // Disable logging
@@ -24,7 +25,6 @@ public class Main {
         // Register events
         Config.registerEvents();
         
-         // Create Kettle
       
 
         Config.createStatement("select value from Cruise_con_Reading")
@@ -34,7 +34,25 @@ public class Main {
                     }
                 });
 
-        
-        
+                Config.createStatement("select value from Cruise_state_reading")
+                .setSubscriber(new Object() {
+                    public void update(int temp) throws InterruptedException {
+                      //  ams.tempSignal(temp); expected feed back to be writen 
+                    }
+                });
+                
+                Config.createStatement("select fuel_Read from Fuel_Reading")
+                .setSubscriber(new Object() {
+                    public void update(int temp) throws InterruptedException {
+                      //  ams.tempSignal(temp); expected feed back to be writen 
+                    }
+                });
+                //PedalEvent
+                Config.createStatement("select speed from PedalEvent")
+                .setSubscriber(new Object() {
+                    public void update(int temp) throws InterruptedException {
+                      //  ams.tempSignal(temp); expected feed back to be writen 
+                    }
+                });
     }
 }
