@@ -9,7 +9,10 @@ package events;
  *
  * @author Omar
  */
-public class TestEvent {
-    // To be Deleted!!!!!!!!!
-    // Just a Test
+public class BrakeEvent {
+    private float pressure;
+    
+    public void increasePressure() {
+        
+    }
 }
