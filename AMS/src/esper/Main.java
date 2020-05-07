@@ -54,5 +54,13 @@ public class Main {
                       //  ams.tempSignal(temp); expected feed back to be writen 
                     }
                 });
+                //SpeedOMeterReading
+                Config.createStatement("select Speed from SpeedOMeterReading")
+                .setSubscriber(new Object() {
+                    public void update(int temp) throws InterruptedException {
+                      //  ams.tempSignal(temp); expected feed back to be writen 
+                    }
+                });
+                
     }
 }
