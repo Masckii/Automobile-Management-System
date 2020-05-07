@@ -10,5 +10,8 @@ package model;
  * @author Omar Shan
  */
 public enum CruiseControllerState {
-    ACTIVATE, DEACTIVATE, RESUME
+    ACTIVATE, DEACTIVATE, RESUME;
+    
+    
+    
 }

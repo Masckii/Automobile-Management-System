@@ -28,11 +28,11 @@ public class AutoMobileManagmentSystem {
     //-
 
     public AutoMobileManagmentSystem() {
-        this.cc = new CruiseController();
+       
         this.monitor = new Monitor();
         this.dss = new DriveShaftSensor();
         gui = new View_AMS();
-
+        this.cc = new CruiseController(gui);
     }
 
     public boolean isEngineOn() {
