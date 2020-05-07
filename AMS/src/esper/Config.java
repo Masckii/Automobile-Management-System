@@ -18,7 +18,8 @@ import events.CalibratorSensorReading;
 public class Config {
 
     private static EPServiceProvider engine = EPServiceProviderManager.getDefaultProvider();
-     public static void registerEvents() {
+
+    public static void registerEvents() {
         engine.getEPAdministrator().getConfiguration().addEventType(CalibratorSensorReading.class);
         System.out.println("Events Successfully Registered.");
     }
@@ -28,9 +29,8 @@ public class Config {
         System.out.println("EPL Statement Successfully Created.");
         return result;
     }
-    
-    public static void sendEvent(Object o)
-    {
+
+    public static void sendEvent(Object o) {
         engine.getEPRuntime().sendEvent(o);
     }
 }
