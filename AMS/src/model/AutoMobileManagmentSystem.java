@@ -32,7 +32,7 @@ public class AutoMobileManagmentSystem {
         this.monitor = new Monitor();
         this.dss = new DriveShaftSensor();
         gui = new View_AMS();
-        this.cc = new CruiseController(gui);
+        this.cc = new CruiseController(this);
     }
 
     public boolean isEngineOn() {
