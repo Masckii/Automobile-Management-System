@@ -9,17 +9,20 @@ package events;
  *
  * @author sam
  */
-public class Cruise_state_reading {
-
-    private boolean  state_csr;
-
-    public Cruise_state_reading(boolean state) {
-        this.state_csr = state;
+public class Gear_Reading {
+    
+    
+    private final int gear_position;
+    
+    public Gear_Reading(int gp)
+    {
+        this.gear_position = gp;
     }
 
-    public boolean isState_csr() {
-        return state_csr;
+    public int getGear_position() {
+        return gear_position;
     }
 
 
+    
 }

@@ -3,32 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package model;
 
+import esper.Config;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author samir mohamed
+ * @author sam
  */
-public class Fuel_Sensor {
+    public class Fuel_Sensor extends Thread{
 
-    public void beep(int fuel_value)  {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (fuel_value < 20)//
-                {
-                    System.out.println("Beep!");
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Fuel_Sensor.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+    
+    model.AutoMobileManagmentSystem ams ;
+    public Fuel_Sensor(model.AutoMobileManagmentSystem ams) {
+        this.ams = ams ;
+        
+    }
+
+   public void run() {
+        while (true) {
+           
+
+            try {
+                this.sleep(1000);
+            } catch (InterruptedException ex) {
+                
+               Logger.getLogger(model.Calibrator.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }).start();
+              //System.out.println("speed : "+ams.get_speedOmeter());
+                Config.sendEvent(new events.Fuel_Reading( ams.get_fuel_reaging()));
+        }
     }
 
 }
+

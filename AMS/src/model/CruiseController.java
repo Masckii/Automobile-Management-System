@@ -20,60 +20,39 @@ public class CruiseController extends Thread {
     private CruiseControllerAcceleration acceleration;
     private model.AutoMobileManagmentSystem ams;
     private int cruise_con_value;
-    
-    
-    
-    
+
     public CruiseController(AutoMobileManagmentSystem ams) {
         state = CruiseControllerState.DEACTIVATE;
         acceleration = CruiseControllerAcceleration.STOP_ACCELERATE;
-        this.ams = ams ;
+        this.ams = ams;
     }
 
+    public Void Activate_Cruise_control() {
 
-    public Void Activate_Cruise_control()
-    {
-        
-        
         return null;
     }
-    public Void Deactivate_Cruise_control()
-    {
-        
-        
+
+    public Void Deactivate_Cruise_control() {
+
         return null;
     }
-    
-    public Void Res_Cruise_control()
-    {
-        
-        
+
+    public Void Res_Cruise_control() {
+
         return null;
     }
-    
+
     @Override
     public void run() {
         while (true) {
 
             try {
-                if (state == CruiseControllerState.ACTIVATE) {
-                    
-                }
-                else if (state == CruiseControllerState.DEACTIVATE) {
-                    
-                }
-                else
-                {
-                    
-                }
 
-                
                 this.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(CruiseController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-               
         }
     }
 

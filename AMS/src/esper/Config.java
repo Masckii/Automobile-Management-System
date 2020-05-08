@@ -15,6 +15,8 @@ import events.SpeedOMeterReading;
 import events.TransmissionGearEvent;
 import events.TripEvent;
 import events.BrakeEvent;
+import events.Cruise_state_reading;
+
 // Add all events classes
 
 /**
@@ -23,14 +25,15 @@ import events.BrakeEvent;
  */
 public class Config {
 
-    private static EPServiceProvider engine = EPServiceProviderManager.getDefaultProvider();
+    private static final EPServiceProvider engine = EPServiceProviderManager.getDefaultProvider();
 
     public static void registerEvents() {
         engine.getEPAdministrator().getConfiguration().addEventType(CalibratorSensorReading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(Cruise_con_Reading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(events.Cruise_state_reading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(events.Fuel_Reading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(Cruise_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(events.EngineEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(events.Gear_Reading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(Cruise_con_Reading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(events.Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(SpeedOMeterReading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(TransmissionGearEvent.class);

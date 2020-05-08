@@ -10,7 +10,6 @@ import model.Calibrator;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
 /**
  *
  * @author Omar Shan
@@ -24,21 +23,19 @@ public class Main {
     public static void main(String[] args) {
         // Create Ams
 
-
         // Disable logging
         Logger.getRootLogger().setLevel(Level.OFF);
         // Register events
         Config.registerEvents();
         final AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
 
-        
         Config.createStatement("select speed from SpeedOMeterReading")
                 .setSubscriber(new Object() {
                     public void update(int state) throws InterruptedException {
                         ams.set_speedOmeter(state);
                     }
                 });
-        
+
         System.out.println("esper.Main.main()");
         Config.createStatement("select state from EngineEvent")
                 .setSubscriber(new Object() {
@@ -47,6 +44,12 @@ public class Main {
                     }
                 });
 
+        Config.createStatement("select state_csr from Cruise_state_reading")
+                .setSubscriber(new Object() {
+                    public void update(boolean state) throws InterruptedException {
+                        ams.setCruise_state(state);
+                    }
+                });
 
 //
 //        Config.createStatement("select value from Cruise_con_Reading")
@@ -56,19 +59,30 @@ public class Main {
 //                    }
 //                });
 //
-//        Config.createStatement("select value from Cruise_state_reading")
-//                .setSubscriber(new Object() {
-//                    public void update(int temp) throws InterruptedException {
-//                        //  ams.tempSignal(temp); expected feed back to be writen 
-//                    }
-//                });
-//
-//        Config.createStatement("select fuel_Read from Fuel_Reading")
-//                .setSubscriber(new Object() {
-//                    public void update(int temp) throws InterruptedException {
-//                        //  ams.tempSignal(temp); expected feed back to be writen 
-//                    }
-//                });
+        Config.createStatement("select fuel_Read from Fuel_Reading")
+                .setSubscriber(new Object() {
+                    public void update(int fl) throws InterruptedException {
+                        ams.setFuel_reading(fl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+
+        Config.createStatement("select gear_position from Gear_Reading")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                        ams.setGear_pos(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+
+        Config.createStatement("select state from TripEvent")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                        ams.setTrip_state(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")
 //                .setSubscriber(new Object() {
