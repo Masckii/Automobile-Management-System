@@ -441,11 +441,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Second"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSecondGearActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonThirdGear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Third"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonThirdGearActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="buttonStartTrip">
           <Properties>

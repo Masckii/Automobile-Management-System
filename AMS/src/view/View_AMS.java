@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
+import model.AutoMobileManagmentSystem;
 
 /**
  *
@@ -29,6 +30,11 @@ public class View_AMS extends javax.swing.JFrame {
     /**
      * Creates new form View_AMS
      */
+    static double speed = 0.0;
+    static double RPM=0.0;
+    static double GearState=1.0;
+    static boolean enginestate=false;
+    static AutoMobileManagmentSystem Auto=new AutoMobileManagmentSystem();
     public View_AMS() {
         initComponents();
         if (sliderFuel.getValue() <= 2) {
@@ -322,8 +328,18 @@ public class View_AMS extends javax.swing.JFrame {
         });
 
         buttonSecondGear.setText("Second");
+        buttonSecondGear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSecondGearActionPerformed(evt);
+            }
+        });
 
         buttonThirdGear.setText("Third");
+        buttonThirdGear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonThirdGearActionPerformed(evt);
+            }
+        });
 
         buttonStartTrip.setText("Start Trip");
         buttonStartTrip.addActionListener(new java.awt.event.ActionListener() {
@@ -598,6 +614,7 @@ public class View_AMS extends javax.swing.JFrame {
             radialRPM.setValueAnimated(10);
             displayRPM.setValueAnimated(10);
         }
+        enginestate=true;
         //else do nothing.
     }//GEN-LAST:event_buttonStartEngineActionPerformed
 
@@ -607,6 +624,7 @@ public class View_AMS extends javax.swing.JFrame {
             radialRPM.setValueAnimated(0);
             displayRPM.setValueAnimated(0);
         }
+        enginestate=false;
         //else do nothing.
     }//GEN-LAST:event_buttonStopEngineActionPerformed
 
@@ -616,20 +634,51 @@ public class View_AMS extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSetFuelActionPerformed
 
     private void buttonAccelerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccelerateActionPerformed
-        // TODO add your handling code here:
+       
+        speed=Auto.PerformAcceleration(speed, GearState, RPM, true)[0];
+        RPM=Auto.PerformAcceleration(speed, GearState, RPM, true)[1];
+        GearState=Auto.PerformAcceleration(speed, GearState, RPM, true)[2];
+        radialSpeedometer.setValueAnimated(speed);
+        displayCrusingSpeed.setValueAnimated(speed);
+        if(enginestate==true){
+        radialRPM.setValueAnimated(RPM);
+        displayRPM.setValueAnimated(RPM);
+        }
+        displayGear.setValueAnimated(GearState);
+
+        
     }//GEN-LAST:event_buttonAccelerateActionPerformed
 
     private void buttonBrakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrakeActionPerformed
-        // TODO add your handling code here:
+        speed=Auto.PerformAcceleration(speed, GearState, RPM, false)[0];
+        RPM=Auto.PerformAcceleration(speed, GearState, RPM, false)[1];
+        GearState=Auto.PerformAcceleration(speed, GearState, RPM, false)[2];
+        displayCrusingSpeed.setValueAnimated(speed);
+        radialSpeedometer.setValueAnimated(speed);
+        
+        if(enginestate==true){
+        radialRPM.setValueAnimated(RPM);
+        displayRPM.setValueAnimated(RPM);
+        }
+        displayGear.setValueAnimated(GearState);
     }//GEN-LAST:event_buttonBrakeActionPerformed
 
     private void buttonFirstGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFirstGearActionPerformed
-        // TODO add your handling code here:
+        
+        GearState=1;
     }//GEN-LAST:event_buttonFirstGearActionPerformed
 
     private void buttonStartTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartTripActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonStartTripActionPerformed
+
+    private void buttonSecondGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSecondGearActionPerformed
+         GearState=2;
+    }//GEN-LAST:event_buttonSecondGearActionPerformed
+
+    private void buttonThirdGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThirdGearActionPerformed
+         GearState=3;
+    }//GEN-LAST:event_buttonThirdGearActionPerformed
 
     /**
      * @param args the command line arguments
