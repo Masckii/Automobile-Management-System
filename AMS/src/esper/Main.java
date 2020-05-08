@@ -28,47 +28,47 @@ public class Main {
         // Register events
         Config.registerEvents();
 
-        Config.createStatement("select state from Engine_reading")
+        Config.createStatement("select state from EngineEvent")
                 .setSubscriber(new Object() {
                     public void update(boolean state) throws InterruptedException {
                         ams.setEngineState(state);
                     }
                 });
-
-        Config.createStatement("select value from Cruise_con_Reading")
-                .setSubscriber(new Object() {
-                    public void update(int temp) throws InterruptedException {
-                        //  ams.tempSignal(temp); expected feed back to be writen 
-                    }
-                });
-
-        Config.createStatement("select value from Cruise_state_reading")
-                .setSubscriber(new Object() {
-                    public void update(int temp) throws InterruptedException {
-                        //  ams.tempSignal(temp); expected feed back to be writen 
-                    }
-                });
-
-        Config.createStatement("select fuel_Read from Fuel_Reading")
-                .setSubscriber(new Object() {
-                    public void update(int temp) throws InterruptedException {
-                        //  ams.tempSignal(temp); expected feed back to be writen 
-                    }
-                });
-        //PedalEvent
-        Config.createStatement("select speed from PedalEvent")
-                .setSubscriber(new Object() {
-                    public void update(int temp) throws InterruptedException {
-                        //  ams.tempSignal(temp); expected feed back to be writen 
-                    }
-                });
-        //SpeedOMeterReading
-        Config.createStatement("select Speed from SpeedOMeterReading")
-                .setSubscriber(new Object() {
-                    public void update(int temp) throws InterruptedException {
-                        //  ams.tempSignal(temp); expected feed back to be writen 
-                    }
-                });
+//
+//        Config.createStatement("select value from Cruise_con_Reading")
+//                .setSubscriber(new Object() {
+//                    public void update(int temp) throws InterruptedException {
+//                        //  ams.tempSignal(temp); expected feed back to be writen 
+//                    }
+//                });
+//
+//        Config.createStatement("select value from Cruise_state_reading")
+//                .setSubscriber(new Object() {
+//                    public void update(int temp) throws InterruptedException {
+//                        //  ams.tempSignal(temp); expected feed back to be writen 
+//                    }
+//                });
+//
+//        Config.createStatement("select fuel_Read from Fuel_Reading")
+//                .setSubscriber(new Object() {
+//                    public void update(int temp) throws InterruptedException {
+//                        //  ams.tempSignal(temp); expected feed back to be writen 
+//                    }
+//                });
+//        //PedalEvent
+//        Config.createStatement("select speed from PedalEvent")
+//                .setSubscriber(new Object() {
+//                    public void update(int temp) throws InterruptedException {
+//                        //  ams.tempSignal(temp); expected feed back to be writen 
+//                    }
+//                });
+//        //SpeedOMeterReading
+//        Config.createStatement("select Speed from SpeedOMeterReading")
+//                .setSubscriber(new Object() {
+//                    public void update(int temp) throws InterruptedException {
+//                        //  ams.tempSignal(temp); expected feed back to be writen 
+//                    }
+//                });
 
     }
 }

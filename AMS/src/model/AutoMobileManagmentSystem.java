@@ -38,7 +38,7 @@ public class AutoMobileManagmentSystem {
 
     public double[] PerformAcceleration(double speed, double gear, double rpm, boolean accelerate) {
 
-        if (isEngineOn() == true) {
+        
             if (accelerate == true) {
                 if (speed < (gear * 33)) {
                     speed = speed + 5;
@@ -70,7 +70,7 @@ public class AutoMobileManagmentSystem {
                     speed = 0;
                 }
             }
-        }
+        
         cruise_controll_values[0] = speed;
         cruise_controll_values[1] = rpm;
         cruise_controll_values[2] = gear;
