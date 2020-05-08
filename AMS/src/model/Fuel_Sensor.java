@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Fuel_Sensor {
 
-    public void beep(int fuel_value) {
+    public void beep(int fuel_value)  {
         new Thread(new Runnable() {
             @Override
             public void run() {

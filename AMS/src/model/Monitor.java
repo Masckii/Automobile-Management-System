@@ -23,7 +23,6 @@ public class Monitor {
         this.maintenance = "";
         this.fuel_consumption = 0f;
         this.miles_driven = 0;
-        this.speed = new Calibrator();
         this.trip = 0;
     }
 

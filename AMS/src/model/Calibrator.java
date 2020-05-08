@@ -3,47 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
+
+import esper.Config;
+import events.SpeedOMeterReading;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Omar Shan
  */
-public class Calibrator {
-    private float speed;
+public class Calibrator extends Thread {
+
+    private int speed;
     private float distance;
     private DriveShaftSensor dss;
+    AutoMobileManagmentSystem ams;
 
-    public Calibrator() {
-        this.speed = 0f;
+    public Calibrator(AutoMobileManagmentSystem ams) {
+        this.speed = 0;
         this.distance = 0f;
         this.dss = new DriveShaftSensor();
+        this.ams = ams;
     }
 
-    public float getSpeed() {
-        return speed;
+    @Override
+    public void run() {
+        while (true) {
+           
+
+            try {
+                this.sleep(1000);
+
+            } catch (InterruptedException ex) {
+               Logger.getLogger(Calibrator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              //System.out.println("speed : "+ams.get_speedOmeter());
+                Config.sendEvent(new SpeedOMeterReading(ams.get_speedOmeter()));
+        }
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
-    public float getDistance() {
-        return distance;
-    }
-
-    public void setDistance(float distance) {
-        this.distance = distance;
-    }
-
-    public DriveShaftSensor getDss() {
-        return dss;
-    }
-
-    public void setDss(DriveShaftSensor dss) {
-        this.dss = dss;
-    }
-    
-    
 }

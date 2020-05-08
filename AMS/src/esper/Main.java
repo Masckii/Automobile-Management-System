@@ -6,6 +6,8 @@
 package esper;
 
 import model.AutoMobileManagmentSystem;
+import model.Calibrator;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -18,22 +20,34 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    //private Calibrator cal;
     public static void main(String[] args) {
         // Create Ams
 
-        final model.AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
 
         // Disable logging
         Logger.getRootLogger().setLevel(Level.OFF);
         // Register events
         Config.registerEvents();
+        final AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
 
+        
+        Config.createStatement("select speed from SpeedOMeterReading")
+                .setSubscriber(new Object() {
+                    public void update(int state) throws InterruptedException {
+                        ams.set_speedOmeter(state);
+                    }
+                });
+        
+        System.out.println("esper.Main.main()");
         Config.createStatement("select state from EngineEvent")
                 .setSubscriber(new Object() {
                     public void update(boolean state) throws InterruptedException {
                         ams.setEngineState(state);
                     }
                 });
+
+
 //
 //        Config.createStatement("select value from Cruise_con_Reading")
 //                .setSubscriber(new Object() {
@@ -69,6 +83,5 @@ public class Main {
 //                        //  ams.tempSignal(temp); expected feed back to be writen 
 //                    }
 //                });
-
     }
 }
