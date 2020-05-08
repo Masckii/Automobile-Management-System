@@ -228,7 +228,6 @@ public class View_AMS extends javax.swing.JFrame {
         buttonThirdGear = new javax.swing.JButton();
         buttonStartTrip = new javax.swing.JButton();
         butonStopTrip = new javax.swing.JButton();
-        radialFuel = new eu.hansolo.steelseries.gauges.Radial1Lcd();
         radialRPM = new eu.hansolo.steelseries.gauges.Radial4();
         displayCrusingSpeed = new eu.hansolo.steelseries.gauges.DisplaySingle();
         digitalRadial1 = new eu.hansolo.steelseries.gauges.DigitalRadial();
@@ -236,7 +235,6 @@ public class View_AMS extends javax.swing.JFrame {
         displayRPM = new eu.hansolo.steelseries.gauges.DisplaySingle();
         jLabel2 = new javax.swing.JLabel();
         displayAvgFuel = new eu.hansolo.steelseries.gauges.DisplaySingle();
-        radialSpeedometer = new eu.hansolo.steelseries.gauges.Radial2Lcd();
         displayMilesDriven = new eu.hansolo.steelseries.gauges.DisplaySingle();
         jLabel8 = new javax.swing.JLabel();
         displayMaintenance = new eu.hansolo.steelseries.gauges.DisplaySingle();
@@ -419,7 +417,7 @@ public class View_AMS extends javax.swing.JFrame {
                                 .addComponent(lightBulb1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(21, 21, 21))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -459,16 +457,6 @@ public class View_AMS extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        radialFuel.setMaxValue(10.0);
-        radialFuel.setName("Fuel"); // NOI18N
-        radialFuel.setTitle("Fuel");
-        radialFuel.setTrackRange(10.0);
-        radialFuel.setTrackSection(5.0);
-        radialFuel.setTrackStartColor(new java.awt.Color(255, 0, 0));
-        radialFuel.setTrackStopColor(new java.awt.Color(0, 255, 0));
-        radialFuel.setTrackVisible(true);
-        radialFuel.setUnitString("E/F");
-
         radialRPM.setToolTipText("");
         radialRPM.setMaxMeasuredValueVisible(true);
         radialRPM.setMaxValue(80.0);
@@ -492,10 +480,6 @@ public class View_AMS extends javax.swing.JFrame {
 
         displayAvgFuel.setUnitString("avg/fuel");
         displayAvgFuel.setVerifyInputWhenFocusTarget(false);
-
-        radialSpeedometer.setLcdUnitStringVisible(true);
-        radialSpeedometer.setTitle("Speed");
-        radialSpeedometer.setUnitString("km.h");
 
         displayMilesDriven.setUnitString("Miles");
 
@@ -542,11 +526,7 @@ public class View_AMS extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(radialRPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(radialSpeedometer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(radialFuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(118, 118, 118)
                         .addComponent(digitalRadial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(clock1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -556,13 +536,10 @@ public class View_AMS extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(radialRPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(digitalRadial1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(clock1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(radialFuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radialSpeedometer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(radialRPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(digitalRadial1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clock1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
@@ -575,7 +552,7 @@ public class View_AMS extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(displayMaintenance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(displayAvgFuel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -757,9 +734,7 @@ public class View_AMS extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private eu.hansolo.lightbulb.LightBulb lightBulb1;
-    private eu.hansolo.steelseries.gauges.Radial1Lcd radialFuel;
     private eu.hansolo.steelseries.gauges.Radial4 radialRPM;
-    private eu.hansolo.steelseries.gauges.Radial2Lcd radialSpeedometer;
     private javax.swing.JSlider sliderFuel;
     // End of variables declaration//GEN-END:variables
 }

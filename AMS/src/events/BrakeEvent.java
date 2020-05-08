@@ -12,7 +12,16 @@ package events;
 public class BrakeEvent {
     private float pressure;
     
-    public void increasePressure() {
-        
+    public BrakeEvent() {
+        this.pressure = 1;
+    }
+    
+    public void increasePressure() throws InterruptedException {
+        this.pressure += (pressure/10);
+        Thread.sleep(60);
+    }
+    
+    public float getPressure() {
+        return this.pressure;
     }
 }

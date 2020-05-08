@@ -10,20 +10,19 @@ package events;
  * @author Omar
  */
 public class PedalEvent {
-    private float speed;
+    private float pressure;
     private boolean isReleased;
 
     public PedalEvent() {
-        this.speed = 1;
+        this.pressure = 1;
         isReleased = true;
     }
     
     public void increaseSpeed() throws InterruptedException {
         this.isReleased = false;
-        while (speed <= 100.0) {
+        while (pressure <= 100.0) {
             Thread.sleep(50);
-            speed += (speed / 10.0);
-            System.out.println(speed);
+            this.pressure += (pressure / 10.0);
         }
     }
     

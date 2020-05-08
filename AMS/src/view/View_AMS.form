@@ -68,11 +68,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="radialRPM" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="radialSpeedometer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="radialFuel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                       <Component id="digitalRadial1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="clock1" min="-2" max="-2" attributes="0"/>
@@ -86,14 +82,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="radialRPM" max="32767" attributes="0"/>
-                      <Component id="digitalRadial1" max="32767" attributes="0"/>
-                      <Component id="clock1" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="radialFuel" min="-2" max="-2" attributes="0"/>
-                  <Component id="radialSpeedometer" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="radialRPM" max="32767" attributes="0"/>
+                  <Component id="digitalRadial1" max="32767" attributes="0"/>
+                  <Component id="clock1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -109,7 +101,7 @@
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="displayMaintenance" max="32767" attributes="0"/>
                                   <Component id="displayAvgFuel" max="32767" attributes="0"/>
@@ -247,7 +239,7 @@
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                                  <EmptySpace pref="73" max="32767" attributes="0"/>
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -468,23 +460,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="eu.hansolo.steelseries.gauges.Radial1Lcd" name="radialFuel">
-      <Properties>
-        <Property name="maxValue" type="double" value="10.0"/>
-        <Property name="name" type="java.lang.String" value="Fuel" noResource="true"/>
-        <Property name="title" type="java.lang.String" value="Fuel"/>
-        <Property name="trackRange" type="double" value="10.0"/>
-        <Property name="trackSection" type="double" value="5.0"/>
-        <Property name="trackStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="trackStopColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="ff" red="0" type="rgb"/>
-        </Property>
-        <Property name="trackVisible" type="boolean" value="true"/>
-        <Property name="unitString" type="java.lang.String" value="E/F"/>
-      </Properties>
-    </Component>
     <Container class="eu.hansolo.steelseries.gauges.Radial4" name="radialRPM">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -557,13 +532,6 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
-    <Component class="eu.hansolo.steelseries.gauges.Radial2Lcd" name="radialSpeedometer">
-      <Properties>
-        <Property name="lcdUnitStringVisible" type="boolean" value="true"/>
-        <Property name="title" type="java.lang.String" value="Speed"/>
-        <Property name="unitString" type="java.lang.String" value="km.h"/>
-      </Properties>
-    </Component>
     <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayMilesDriven">
       <Properties>
         <Property name="unitString" type="java.lang.String" value="Miles"/>
