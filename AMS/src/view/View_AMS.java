@@ -5,6 +5,7 @@
  */
 package view;
 
+import esper.Config;
 import eu.hansolo.lightbulb.LightBulb;
 import eu.hansolo.steelseries.gauges.Clock;
 import eu.hansolo.steelseries.gauges.DigitalRadial;
@@ -12,6 +13,7 @@ import eu.hansolo.steelseries.gauges.DisplaySingle;
 import eu.hansolo.steelseries.gauges.Radial1Lcd;
 import eu.hansolo.steelseries.gauges.Radial2Lcd;
 import eu.hansolo.steelseries.gauges.Radial4;
+import events.EngineEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,10 +33,11 @@ public class View_AMS extends javax.swing.JFrame {
      * Creates new form View_AMS
      */
     static double speed = 0.0;
-    static double RPM=0.0;
-    static double GearState=1.0;
-    static boolean enginestate=false;
-    static AutoMobileManagmentSystem Auto=new AutoMobileManagmentSystem();
+    static double RPM = 0.0;
+    static double GearState = 1.0;
+    static boolean enginestate = false;
+    static AutoMobileManagmentSystem Auto = new AutoMobileManagmentSystem();
+
     public View_AMS() {
         initComponents();
         if (sliderFuel.getValue() <= 2) {
@@ -136,7 +139,6 @@ public class View_AMS extends javax.swing.JFrame {
     public JLabel getjLabel2() {
         return jLabel2;
     }
-
 
     public JLabel getjLabel4() {
         return jLabel4;
@@ -609,63 +611,65 @@ public class View_AMS extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStopCruiseActionPerformed
 
     private void buttonStartEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartEngineActionPerformed
+        Config.sendEvent(new EngineEvent(true));
         if (lightBulb1.isOn() == false) {
             lightBulb1.setOn(true);
             radialRPM.setValueAnimated(10);
             displayRPM.setValueAnimated(10);
         }
-        enginestate=true;
+        enginestate = true;
         //else do nothing.
     }//GEN-LAST:event_buttonStartEngineActionPerformed
 
     private void buttonStopEngineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopEngineActionPerformed
         if (lightBulb1.isOn() == true) {
+            Config.sendEvent(new EngineEvent(false));
             lightBulb1.setOn(false);
             radialRPM.setValueAnimated(0);
             displayRPM.setValueAnimated(0);
         }
-        enginestate=false;
+        enginestate = false;
         //else do nothing.
     }//GEN-LAST:event_buttonStopEngineActionPerformed
 
     private void buttonSetFuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetFuelActionPerformed
         radialFuel.setValueAnimated(sliderFuel.getValue());
-        
+
     }//GEN-LAST:event_buttonSetFuelActionPerformed
 
     private void buttonAccelerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccelerateActionPerformed
-       
-        speed=Auto.PerformAcceleration(speed, GearState, RPM, true)[0];
-        RPM=Auto.PerformAcceleration(speed, GearState, RPM, true)[1];
-        GearState=Auto.PerformAcceleration(speed, GearState, RPM, true)[2];
+
+        speed = Auto.PerformAcceleration(speed, GearState, RPM, true)[0];
+        RPM = Auto.PerformAcceleration(speed, GearState, RPM, true)[1];
+        GearState = Auto.PerformAcceleration(speed, GearState, RPM, true)[2];
         radialSpeedometer.setValueAnimated(speed);
         displayCrusingSpeed.setValueAnimated(speed);
-        if(enginestate==true){
-        radialRPM.setValueAnimated(RPM);
-        displayRPM.setValueAnimated(RPM);
+        if (enginestate == true) {
+            radialRPM.setValueAnimated(RPM);
+            displayRPM.setValueAnimated(RPM);
         }
         displayGear.setValueAnimated(GearState);
 
-        
+
     }//GEN-LAST:event_buttonAccelerateActionPerformed
 
     private void buttonBrakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrakeActionPerformed
-        speed=Auto.PerformAcceleration(speed, GearState, RPM, false)[0];
-        RPM=Auto.PerformAcceleration(speed, GearState, RPM, false)[1];
-        GearState=Auto.PerformAcceleration(speed, GearState, RPM, false)[2];
+        speed = Auto.PerformAcceleration(speed, GearState, RPM, false)[0];
+        RPM = Auto.PerformAcceleration(speed, GearState, RPM, false)[1];
+        GearState = Auto.PerformAcceleration(speed, GearState, RPM, false)[2];
         displayCrusingSpeed.setValueAnimated(speed);
         radialSpeedometer.setValueAnimated(speed);
-        
-        if(enginestate==true){
-        radialRPM.setValueAnimated(RPM);
-        displayRPM.setValueAnimated(RPM);
+
+        if (enginestate == true) {
+            radialRPM.setValueAnimated(RPM);
+            displayRPM.setValueAnimated(RPM);
         }
         displayGear.setValueAnimated(GearState);
     }//GEN-LAST:event_buttonBrakeActionPerformed
 
     private void buttonFirstGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFirstGearActionPerformed
-        
-        GearState=1;
+
+        GearState = 1;
     }//GEN-LAST:event_buttonFirstGearActionPerformed
 
     private void buttonStartTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartTripActionPerformed
@@ -673,11 +677,11 @@ public class View_AMS extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStartTripActionPerformed
 
     private void buttonSecondGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSecondGearActionPerformed
-         GearState=2;
+        GearState = 2;
     }//GEN-LAST:event_buttonSecondGearActionPerformed
 
     private void buttonThirdGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThirdGearActionPerformed
-         GearState=3;
+        GearState = 3;
     }//GEN-LAST:event_buttonThirdGearActionPerformed
 
     /**
@@ -714,7 +718,7 @@ public class View_AMS extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new View_AMS().setVisible(true);
-                
+
             }
         });
     }

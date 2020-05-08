@@ -9,15 +9,15 @@ package events;
  *
  * @author sam
  */
-public class Engine_reading {
+public class EngineEvent {
 
-    private final int state;
+    private boolean state;
 
-    public Engine_reading(int state) {
+    public EngineEvent(boolean state) {
         this.state = state;
     }
 
-    public int getState() {
+    public boolean getState() {
         return state;
     }
 

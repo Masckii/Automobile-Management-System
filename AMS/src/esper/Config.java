@@ -30,7 +30,7 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(Cruise_con_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(events.Cruise_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(events.Fuel_Reading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(events.Engine_reading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(events.EngineEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(SpeedOMeterReading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(TransmissionGearEvent.class);
