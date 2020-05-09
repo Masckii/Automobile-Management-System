@@ -50,6 +50,7 @@ public class AutoMobileManagmentSystem {
         //vars
         Clabirator_state = false;
         cruise_value = 0;
+        cruise_state = false;
         //
         cal = new Calibrator(this);
         fs = new Fuel_Sensor(this);
@@ -137,15 +138,24 @@ public class AutoMobileManagmentSystem {
 
     }
 
-    public void get_cruise_update()
-    {
-        
+    public void get_cruise_update() {
+        if (cruise_state == true&&gear_pos==3) {
+            cc.setState(CruiseControllerState.ACTIVATE);
+            cc.setCruise_res_value(current_speed);
+
+        } else {
+            cc.setState(CruiseControllerState.DEACTIVATE);
+            cc.setCruise_con_value(current_speed);
+
+        }
+
     }
-    
-   public void set_cruise_readig_handle(int cruise_speed) {
-        if (cruise_state == true) {
-            gui.getDisplayCrusingSpeed().setValue(cruise_speed);
-            this.current_speed =cruise_speed;
+
+    public void set_cruise_readig_handle(int cruise_speed) {
+        if (cruise_state == true&&gear_pos==3) {
+            System.out.println("model.AutoMobileManagmentSystem.set_cruise_readig_handle()");
+            gui.getDisplayCrusingSpeed().setValue(cruise_value);
+            this.current_speed = cruise_value;
 
         } else {
             gui.getDisplayCrusingSpeed().setValue(0);
@@ -329,8 +339,15 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setCruise_state(boolean cruise_state) {
-        gui.getCrusing_lightBulb1().setOn(cruise_state);
-        this.cruise_state = cruise_state;
+        if (cruise_state == true &&gear_pos==3) {
+            gui.getCrusing_lightBulb1().setOn(true);
+            cruise_value = current_speed;
+            this.cruise_state = true;
+        } else {
+            gui.getCrusing_lightBulb1().setOn(false);
+            this.cruise_state = false;
+        }
+
     }
 
     public int get_speedOmeter() {
@@ -398,7 +415,9 @@ public class AutoMobileManagmentSystem {
         System.err.println("Curent Fuel : " + fuel_reading);
         System.err.println("gear_pos : " + gear_pos);
         System.err.println("Curent speed : " + speed_in);
+        System.err.println("cruise_state : " + cruise_state);
+        System.err.println("cruise_value : " + cruise_value);
         System.err.println("drivesaft rot  : " + dreive_shaft_rotation);
-    }
 
+    }
 }
