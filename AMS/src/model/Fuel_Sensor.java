@@ -22,15 +22,14 @@ import java.util.logging.Logger;
         
     }
 
-    
-    
+
 
    public void run() {
         while (true) {
            
 
             try {
-                this.sleep(1000);
+                this.sleep(250);
             } catch (InterruptedException ex) {
                 
                Logger.getLogger(model.Calibrator.class.getName()).log(Level.SEVERE, null, ex);

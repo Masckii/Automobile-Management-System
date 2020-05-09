@@ -17,12 +17,14 @@ public class AutoMobileManagmentSystem {
     //--engine
     private boolean state_engine = false;
     private int current_speed;
+    private int messsured_speed = 0;
     private boolean cruise_state = false;
     private int fuel_reading = 0;
     private int gear_pos = 0;
     private int trip_start_time = 0;
     private boolean trip_state = false;
     private static int time_counter_sec = 0;
+    private static int average_speed = 0 ;
     private static float distance = 0;
     private int dreive_shaft_rotation = 0;
     //-- compunents of our AMS 
@@ -176,24 +178,23 @@ public class AutoMobileManagmentSystem {
         if (state_engine && cruise_state == false) {
             try {
                 if (current_speed >= 20 && current_speed < 40) {
-                    float dss_gen = (float) ((1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * random(1, 2)) / 100 * current_speed + random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * current_speed / 20 + random(1, 2) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 40 && current_speed < 60) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * random(2, 3) + current_speed + random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.30 * 3 + 200 * current_speed / 20 + random(2, 3) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 60 && current_speed < 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * random(3, 4) + current_speed + random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.25 * 3 + 200 * current_speed / 20 + random(3, 4) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * random(4, 6) + current_speed + random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 20 + random(4, 5) * random(1, 5));
                     return dss_gen;
 
                 } else {
-                    float dss_gen = (float) ((1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * random(1, 2)) / 100 * current_speed);
-
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 20 + random(1, 2) * random(1, 2));
                 }
             } catch (Exception e) {
             }
@@ -204,12 +205,14 @@ public class AutoMobileManagmentSystem {
     }
 
     void set_distance_driven() {
-        if (state_engine && trip_state && current_speed > 0) {
+        if (state_engine  && current_speed > 0 && dreive_shaft_rotation > 0) {
 
-            distance += current_speed * time_counter_sec / 100;
-
+            // distance += current_speed * time_counter_sec / 100;
+            distance += dreive_shaft_rotation / 1000;
+            messsured_speed = (int)(dreive_shaft_rotation*1.7) / 100;
+            System.err.println("messsured_speed "+messsured_speed);
             set_mentainace_notify((int) distance);
-
+            decrease_fuel((int) distance, fuel_reading);
             float dradial = distance / 165; //13*(10+20) led light
             gui.getDigitalRadial1().setValue(dradial);
 
@@ -217,11 +220,19 @@ public class AutoMobileManagmentSystem {
             time_counter_sec++;
         }
     }
+    
+    void set_average_speed()
+    {
+        if (trip_state == true ) {
+            
+        }
+        
+    }
 
     void set_mentainace_notify(int drav) {
         if (drav > 4950 && drav <= 5000) {
             gui.getDisplayMaintenance().setValue(5000 - drav);
-            if (drav % 2 == 0) {
+            if (drav % 5 == 0) {
                 gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav) + " miles");
 
             }
@@ -229,35 +240,35 @@ public class AutoMobileManagmentSystem {
         } else if (drav >= 4750 && drav <= 4950) {
             gui.getDisplayMaintenance().setValue(5000 - drav);
 
-            if (drav % 3 == 0) {
+            if (drav % 10 == 0) {
                 gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav));
 
             }
         } else if (drav >= 9750 && drav < 9950) {
             gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            if (drav % 3 == 0) {
+            if (drav % 10 == 0) {
                 gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
 
             }
         } else if (drav >= 9950 && drav <= 10000) {
             gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            if (drav % 2 == 0) {
+            if (drav % 5 == 0) {
                 gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
 
             }
         } else if (drav >= 14750 && drav < 14950) {
             gui.getDisplayMaintenance().setValue(15000 - drav);
 
-            if (drav % 3 == 0) {
+            if (drav % 10 == 0) {
                 gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
 
             }
         } else if (drav >= 14950 && drav <= 15000) {
             gui.getDisplayMaintenance().setValue(15000 - drav);
 
-            if (drav % 2 == 0) {
+            if (drav % 5 == 0) {
                 gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
 
             }
@@ -275,6 +286,15 @@ public class AutoMobileManagmentSystem {
         }
     }
 
+    public int decrease_fuel(int distance, int fuel_reading) {
+
+        if (distance % 1000 == 0) {
+            return fuel_reading--;
+        } else {
+            return fuel_reading;
+        }
+    }
+
     public void setFuel_reading(int fuel_reading) {
         this.fuel_reading = fuel_reading;
 
@@ -285,6 +305,7 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setCruise_state(boolean cruise_state) {
+        gui.getCrusing_lightBulb1().setOn(trip_state);
         this.cruise_state = cruise_state;
     }
 
@@ -319,10 +340,18 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setTrip_state(boolean trip_state) {
+        gui.getTripbulb().setOn(trip_state);
         this.trip_state = trip_state;
     }
 
     public void setGear_pos(int gear_pos) {
+        if (gear_pos == 3) {
+            gui.getLightBulb3().setOn(true);
+
+        } else {
+            gui.getLightBulb3().setOn(false);
+
+        }
         this.gear_pos = gear_pos;
     }
 

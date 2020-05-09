@@ -29,7 +29,7 @@ public class Gear_sensor extends Thread {
            
 
             try {
-                Gear_sensor.sleep(1000);
+                Gear_sensor.sleep(250);
             } catch (InterruptedException ex) {
                 
                Logger.getLogger(model.Calibrator.class.getName()).log(Level.SEVERE, null, ex);
