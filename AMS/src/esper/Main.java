@@ -99,6 +99,49 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
+                 Config.createStatement("select state from BrakeEvent")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                        ams.setAccelerate(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select state from AccelerateEvent")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                        ams.setAccelerate(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select speed from SpeedOMeterReading")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                        ams.set_speedOmeter(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select gear_position from Gear_Reading")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                        ams.setGear_pos(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select rpm from RpmEvent")
+                .setSubscriber(new Object() {
+                    public void update(double gl) throws InterruptedException {
+                        ams.setRpm(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select state from PerformEvent")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                        ams.PerformAcceleration(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        
 
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")

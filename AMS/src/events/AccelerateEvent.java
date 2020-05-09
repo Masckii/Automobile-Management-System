@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package events;
 
 /**
  *
- * @author samir mohamed
+ * @author moamen
  */
-public class SpeedOMeterReading {
-    
-    private  int speed;
-    
-    public SpeedOMeterReading(int Speed)
-    {
-        this.speed = Speed;
+public class AccelerateEvent {
+    private boolean state;
+
+    public boolean isState() {
+        return state;
     }
 
-    public int getSpeed() {
-        return speed;
+   
+
+    public AccelerateEvent(boolean state) {
+        this.state = state;
     }
-    
 
     
 }

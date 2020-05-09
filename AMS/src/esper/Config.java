@@ -8,6 +8,7 @@ package esper;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
+import events.AccelerateEvent;
 import events.CalibratorSensorReading;
 import events.Cruise_con_Reading;
 import events.Fuel_Reading;
@@ -18,6 +19,8 @@ import events.BrakeEvent;
 import events.Calibirator_state_reading;
 import events.Cruise_state_reading;
 import events.Drive_shaft_reading;
+import events.PerformEvent;
+import events.RpmEvent;
 
 // Add all events classes
 
@@ -43,6 +46,11 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);
+       
+        engine.getEPAdministrator().getConfiguration().addEventType(RpmEvent.class);
+         engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);
         System.out.println("Events Successfully Registered.");
     }
 

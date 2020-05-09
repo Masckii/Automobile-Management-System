@@ -3,30 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package events;
 
 /**
  *
- * @author Omar
+ * @author moamen
  */
-public class BrakeEvent {
+public class PerformEvent {
     private boolean state;
-    
-    
 
-    public void BrakeEvent(boolean state) {
-        this.state = state;
-    }
-
-    public BrakeEvent(boolean state) {
+    public PerformEvent(boolean state) {
         this.state = state;
     }
 
     public boolean isState() {
         return state;
     }
-
-    
-    
     
 }

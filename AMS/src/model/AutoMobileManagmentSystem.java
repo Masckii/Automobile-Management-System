@@ -37,7 +37,8 @@ public class AutoMobileManagmentSystem {
     private Calibrator cal;
     private Fuel_Sensor fs;
     private model.Timer timer;
-
+boolean accelerate;
+     double rpm=0;
     //therad
     //private model.Fuel_Sensor fuel_sensor;
     // private model.Led_light led_light;
@@ -58,7 +59,7 @@ public class AutoMobileManagmentSystem {
         cc = new CruiseController(this);
         dss = new DriveShaftSensor(this);
         timer = new Timer(this);
-        current_speed = 0;
+        current_speed =0;
         gui = new View_AMS();
         gui.setVisible(true);
         gui.setLocationRelativeTo(null);
@@ -69,45 +70,59 @@ public class AutoMobileManagmentSystem {
         dss.start();
         cc.start();
     }
+ public void setRpm(double rpm) {
+        this.rpm = rpm;
+    }
 
-    public double[] PerformAcceleration(double speed, double gear, double rpm, boolean accelerate) {
+    public boolean isAccelerate() {
+        return accelerate;
+    }
 
+    public void setAccelerate(boolean accelerate) {
+        this.accelerate = accelerate;
+    }
+   public void  PerformAcceleration(boolean state) {
+        if(state==true){
         if (accelerate == true) {
-            if (speed < (gear * 33)) {
-                speed = speed + 5;
-                rpm = ((speed - ((gear - 1) * 33)) * (70 / 33));
+            if (current_speed < (gear_pos * 33)) {
+                System.out.println("kk");
+                current_speed = current_speed + 5;
+                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
 
             }
-            if (speed > 99) {
-                speed = 99;
+            if (current_speed > 99) {
+                current_speed = 99;
             }
 
         } else {
-            if (speed > (gear * 33)) {
-                speed = speed - 5;
-                rpm = ((speed - ((gear - 1) * 33)) * (70 / 33));
+            if (current_speed > (gear_pos * 33)) {
+                current_speed = current_speed - 5;
+                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
             }
-            if (speed <= (gear * 33)) {
-                speed = speed - 5;
-                gear--;
-                if (gear < 1) {
-                    gear = 1;
+            if (current_speed <= (gear_pos * 33)) {
+                current_speed = current_speed - 5;
+                gear_pos--;
+                if (gear_pos < 1) {
+                    gear_pos = 1;
                 }
-                rpm = ((speed - ((gear - 1) * 33)) * (70 / 33));
+                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
 
             }
-            if (gear < 1) {
-                gear = 1;
+            if (gear_pos < 1) {
+                gear_pos = 1;
             }
-            if (speed < 0) {
-                speed = 0;
+            if (current_speed < 0) {
+                current_speed = 0;
             }
         }
-
-        cruise_controll_values[0] = speed;
-        cruise_controll_values[1] = rpm;
-        cruise_controll_values[2] = gear;
-        return cruise_controll_values;
+        System.out.println(current_speed);
+ gui.getRadialSpeedometer().setValueAnimated(current_speed);
+        gui.getDisplayCrusingSpeed().setValueAnimated(current_speed );
+        gui.getRadialRPM().setValueAnimated(rpm);
+        gui.getDisplayRPM().setValueAnimated(rpm);
+        gui.getDisplayGear().setValueAnimated(gear_pos);
+       // return cruise_controll_values;
+}
     }
 
     public void drop_speed_automatic() {
