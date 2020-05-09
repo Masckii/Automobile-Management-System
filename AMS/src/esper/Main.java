@@ -91,6 +91,14 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
+        
+                Config.createStatement("select value from Cruise_con_Reading")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                         ams.set_cruise_readig_handle(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
 
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")

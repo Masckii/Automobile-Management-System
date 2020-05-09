@@ -28,6 +28,7 @@ public class AutoMobileManagmentSystem {
     private static float distance = 0;
     private int dreive_shaft_rotation = 0;
     private boolean Clabirator_state;
+    private static int cruise_value;
     //-- compunents of our AMS 
     private CruiseController cc;
     private Monitor monitor;
@@ -48,11 +49,12 @@ public class AutoMobileManagmentSystem {
     public AutoMobileManagmentSystem() {
         //vars
         Clabirator_state = false;
-
+        cruise_value = 0;
         //
         cal = new Calibrator(this);
         fs = new Fuel_Sensor(this);
         grs = new Gear_sensor(this);
+        cc = new CruiseController(this);
         dss = new DriveShaftSensor(this);
         timer = new Timer(this);
         current_speed = 0;
@@ -64,6 +66,7 @@ public class AutoMobileManagmentSystem {
         grs.start();
         timer.start();
         dss.start();
+        cc.start();
     }
 
     public double[] PerformAcceleration(double speed, double gear, double rpm, boolean accelerate) {
@@ -132,6 +135,21 @@ public class AutoMobileManagmentSystem {
         } catch (Exception e) {
         }
 
+    }
+
+    public void get_cruise_update()
+    {
+        
+    }
+    
+   public void set_cruise_readig_handle(int cruise_speed) {
+        if (cruise_state == true) {
+            gui.getDisplayCrusingSpeed().setValue(cruise_speed);
+            this.current_speed =cruise_speed;
+
+        } else {
+            gui.getDisplayCrusingSpeed().setValue(0);
+        }
     }
 
     public boolean isEngineOn() {

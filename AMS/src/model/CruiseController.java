@@ -16,10 +16,10 @@ import java.util.logging.Logger;
  */
 public class CruiseController extends Thread {
 
-    private CruiseControllerState state;
-    private CruiseControllerAcceleration acceleration;
+    private static CruiseControllerState state;
+    private static CruiseControllerAcceleration acceleration;
     private model.AutoMobileManagmentSystem ams;
-    private int cruise_con_value;
+    private static int cruise_con_value;
 
     public CruiseController(AutoMobileManagmentSystem ams) {
         state = CruiseControllerState.DEACTIVATE;
@@ -27,12 +27,22 @@ public class CruiseController extends Thread {
         this.ams = ams;
     }
 
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     public Void Activate_Cruise_control() {
+
+    
 
         return null;
     }
 
     public Void Deactivate_Cruise_control() {
+
+
 
         return null;
     }
@@ -47,7 +57,7 @@ public class CruiseController extends Thread {
         while (true) {
 
             try {
-
+                System.out.println("model.CruiseController.run()"+this.toString());
                 this.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(CruiseController.class.getName()).log(Level.SEVERE, null, ex);
