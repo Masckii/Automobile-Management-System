@@ -21,7 +21,7 @@ public class Main {
      * @param args the command line arguments
      */
     //private Calibrator cal;
-   public static AutoMobileManagmentSystem ams  = new AutoMobileManagmentSystem();
+    public static AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
 
     public static void main(String[] args) {
         // Create Ams
@@ -57,7 +57,7 @@ public class Main {
                 .setSubscriber(new Object() {
                     public void update(int fl) throws InterruptedException {
                         ams.setDreive_shaft_rotation(fl);
-                        
+
                         //  System.err.println("in fuel");
                     }
                 });
@@ -81,6 +81,13 @@ public class Main {
                 .setSubscriber(new Object() {
                     public void update(boolean gl) throws InterruptedException {
                         ams.setTrip_state(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+        Config.createStatement("select calibirator_state from Calibirator_state_reading")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                        ams.setClabirator_state(gl);
                         //  System.err.println("in fuel");
                     }
                 });

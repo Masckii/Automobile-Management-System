@@ -24,9 +24,10 @@ public class AutoMobileManagmentSystem {
     private int trip_start_time = 0;
     private boolean trip_state = false;
     private static int time_counter_sec = 0;
-    private static int average_speed = 0 ;
+    private static int average_speed = 0;
     private static float distance = 0;
     private int dreive_shaft_rotation = 0;
+    private boolean Clabirator_state;
     //-- compunents of our AMS 
     private CruiseController cc;
     private Monitor monitor;
@@ -45,6 +46,10 @@ public class AutoMobileManagmentSystem {
     private double cruise_controll_values[] = new double[3];
 
     public AutoMobileManagmentSystem() {
+        //vars
+        Clabirator_state = false;
+
+        //
         cal = new Calibrator(this);
         fs = new Fuel_Sensor(this);
         grs = new Gear_sensor(this);
@@ -175,26 +180,28 @@ public class AutoMobileManagmentSystem {
     }
 
     float generates_drive_shaft() {
-        if (state_engine && cruise_state == false) {
+        if (state_engine == true) {
             try {
                 if (current_speed >= 20 && current_speed < 40) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * current_speed / 20 + random(1, 2) * random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * 3 + 200 * current_speed / 4 + random(1, 2) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 40 && current_speed < 60) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.30 * 3 + 200 * current_speed / 20 + random(2, 3) * random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.30 * 3 + 200 * current_speed / 4 + random(2, 3) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 60 && current_speed < 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.25 * 3 + 200 * current_speed / 20 + random(3, 4) * random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.25 * 3 + 200 * current_speed / 4 + random(3, 4) * random(1, 5));
                     return dss_gen;
 
                 } else if (current_speed >= 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 20 + random(4, 5) * random(1, 5));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 4 + random(4, 5) * random(1, 5));
                     return dss_gen;
 
                 } else {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 20 + random(1, 2) * random(1, 2));
+                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * 3 + 200 * current_speed / 4 + random(1, 2) * random(1, 2));
+                    return dss_gen;
+
                 }
             } catch (Exception e) {
             }
@@ -205,12 +212,12 @@ public class AutoMobileManagmentSystem {
     }
 
     void set_distance_driven() {
-        if (state_engine  && current_speed > 0 && dreive_shaft_rotation > 0) {
+        if (state_engine && current_speed > 0 && dreive_shaft_rotation > 0) {
 
             // distance += current_speed * time_counter_sec / 100;
             distance += dreive_shaft_rotation / 1000;
-            messsured_speed = (int)(dreive_shaft_rotation*1.7) / 100;
-            System.err.println("messsured_speed "+messsured_speed);
+            messsured_speed = (int) (dreive_shaft_rotation * 1.7) / 100;
+            System.err.println("messsured_speed " + messsured_speed);
             set_mentainace_notify((int) distance);
             decrease_fuel((int) distance, fuel_reading);
             float dradial = distance / 165; //13*(10+20) led light
@@ -220,13 +227,12 @@ public class AutoMobileManagmentSystem {
             time_counter_sec++;
         }
     }
-    
-    void set_average_speed()
-    {
-        if (trip_state == true ) {
-            
+
+    void set_average_speed() {
+        if (trip_state == true) {
+
         }
-        
+
     }
 
     void set_mentainace_notify(int drav) {
@@ -305,7 +311,7 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setCruise_state(boolean cruise_state) {
-        gui.getCrusing_lightBulb1().setOn(trip_state);
+        gui.getCrusing_lightBulb1().setOn(cruise_state);
         this.cruise_state = cruise_state;
     }
 
@@ -353,6 +359,16 @@ public class AutoMobileManagmentSystem {
 
         }
         this.gear_pos = gear_pos;
+    }
+
+    public boolean isClabirator_state() {
+        return Clabirator_state;
+    }
+
+    public void setClabirator_state(boolean Clabirator_state) {
+
+        gui.getClibirate_lightBulb().setOn(Clabirator_state);
+        this.Clabirator_state = Clabirator_state;
     }
 
     public void set_speedOmeter(int speed_in) {

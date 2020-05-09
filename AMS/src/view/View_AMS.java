@@ -81,7 +81,6 @@ public class View_AMS extends javax.swing.JFrame {
         return buttonStartCruise;
     }
 
-
     public JTextArea getScreen() {
         return screen;
     }
@@ -366,8 +365,18 @@ public class View_AMS extends javax.swing.JFrame {
         });
 
         jButton1.setText("Start calibirate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Stop calibirate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -750,7 +759,6 @@ public class View_AMS extends javax.swing.JFrame {
         View_AMS.enginestate = enginestate;
     }
 
-
     public DisplayCircular getDisplaytime() {
         return driveshaft_display;
     }
@@ -761,7 +769,7 @@ public class View_AMS extends javax.swing.JFrame {
 
     private void buttonAccelerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccelerateActionPerformed
 
-        speed = esper.Main.ams. PerformAcceleration(speed, GearState, RPM, true)[0];
+        speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[0];
         RPM = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[1];
         GearState = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[2];
         radialSpeedometer.setValueAnimated(speed);
@@ -814,10 +822,21 @@ public class View_AMS extends javax.swing.JFrame {
 
     }//GEN-LAST:event_butonStopTripActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Config.sendEvent(new events.Calibirator_state_reading(true));
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Config.sendEvent(new events.Calibirator_state_reading(false));
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-
     public LightBulb getTripbulb() {
         return Tripbulb;
     }

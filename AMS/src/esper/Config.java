@@ -15,6 +15,7 @@ import events.SpeedOMeterReading;
 import events.TransmissionGearEvent;
 import events.TripEvent;
 import events.BrakeEvent;
+import events.Calibirator_state_reading;
 import events.Cruise_state_reading;
 import events.Drive_shaft_reading;
 
@@ -37,8 +38,9 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(events.Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(SpeedOMeterReading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(TransmissionGearEvent.class);//Drive_shaft_reading
+        engine.getEPAdministrator().getConfiguration().addEventType(TransmissionGearEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(TripEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
         System.out.println("Events Successfully Registered.");
