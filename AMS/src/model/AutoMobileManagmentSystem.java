@@ -158,7 +158,6 @@ public class AutoMobileManagmentSystem {
     public void setDreive_shaft_rotation(int dreive_shaft_rotation) {
 
         gui.getDriveshaft_display().setValue(generates_drive_shaft());
-        System.out.println("model.AutoMobileManagmentSystem.setDreive_shaft_rotation()" + generates_drive_shaft());
         this.dreive_shaft_rotation = dreive_shaft_rotation;
 
     }
