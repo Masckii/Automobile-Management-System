@@ -10,6 +10,7 @@ import model.Calibrator;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
 /**
  *
  * @author Omar Shan
@@ -20,6 +21,8 @@ public class Main {
      * @param args the command line arguments
      */
     //private Calibrator cal;
+   public static AutoMobileManagmentSystem ams  = new AutoMobileManagmentSystem();
+
     public static void main(String[] args) {
         // Create Ams
 
@@ -27,7 +30,6 @@ public class Main {
         Logger.getRootLogger().setLevel(Level.OFF);
         // Register events
         Config.registerEvents();
-        final AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();
 
         Config.createStatement("select speed from SpeedOMeterReading")
                 .setSubscriber(new Object() {
@@ -51,14 +53,14 @@ public class Main {
                     }
                 });
 
-//
-//        Config.createStatement("select value from Cruise_con_Reading")
-//                .setSubscriber(new Object() {
-//                    public void update(int temp) throws InterruptedException {
-//                        //  ams.tempSignal(temp); expected feed back to be writen 
-//                    }
-//                });
-//
+        Config.createStatement("select dsr from Drive_shaft_reading")
+                .setSubscriber(new Object() {
+                    public void update(int fl) throws InterruptedException {
+                        ams.setDreive_shaft_rotation(fl);
+                        
+                        //  System.err.println("in fuel");
+                    }
+                });
         Config.createStatement("select fuel_Read from Fuel_Reading")
                 .setSubscriber(new Object() {
                     public void update(int fl) throws InterruptedException {

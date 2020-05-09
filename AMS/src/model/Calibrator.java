@@ -24,7 +24,6 @@ public class Calibrator extends Thread {
     public Calibrator(AutoMobileManagmentSystem ams) {
         this.speed = 0;
         this.distance = 0f;
-        this.dss = new DriveShaftSensor();
         this.ams = ams;
     }
 
