@@ -83,41 +83,47 @@ boolean accelerate;
     }
    public void  PerformAcceleration(boolean state) {
         if(state==true){
+            int speedo=(int)gui.getRadialSpeedometer().getValue();
         if (accelerate == true) {
-            if (current_speed < (gear_pos * 33)) {
+          // int rr=(int)gui.getRadialSpeedometer().getValue();
+            if (speedo < (gear_pos * 33)) {
                 System.out.println("kk");
-                current_speed = current_speed + 5;
-                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
+                speedo = speedo + 5;
+                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
 
             }
-            if (current_speed > 99) {
-                current_speed = 99;
+            if (speedo > 99) {
+                speedo = 99;
             }
 
         } else {
-            if (current_speed > (gear_pos * 33)) {
-                current_speed = current_speed - 5;
-                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
+            //int rr=(int)gui.getRadialSpeedometer().getValue();
+            if ( speedo > (gear_pos * 33)) {
+                 speedo = speedo - 5;
+                 if(speedo>0){
+                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                 }
             }
-            if (current_speed <= (gear_pos * 33)) {
-                current_speed = current_speed - 5;
+            if (speedo <= (gear_pos * 33)) {
+                speedo = speedo - 5;
                 gear_pos--;
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }
-                rpm = ((current_speed - ((gear_pos - 1) * 33)) * (70 / 33));
-
+                if(speedo>0){
+                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                }
             }
             if (gear_pos < 1) {
                 gear_pos = 1;
             }
-            if (current_speed < 0) {
-                current_speed = 0;
+            if (speedo < 0) {
+                speedo = 0;
             }
         }
-        System.out.println(current_speed);
- gui.getRadialSpeedometer().setValueAnimated(current_speed);
-        gui.getDisplayCrusingSpeed().setValueAnimated(current_speed );
+        System.out.println(speedo);
+        gui.getRadialSpeedometer().setValueAnimated(speedo);
+      //  gui.getDisplayCrusingSpeed().setValueAnimated(rr);
         gui.getRadialRPM().setValueAnimated(rpm);
         gui.getDisplayRPM().setValueAnimated(rpm);
         gui.getDisplayGear().setValueAnimated(gear_pos);
@@ -127,9 +133,18 @@ boolean accelerate;
 
     public void drop_speed_automatic() {
         try {
+            double yy=gui.getRadialSpeedometer().getValue();
             if (state_engine == true && current_speed > 0) {
                 if (current_speed > 20 && current_speed < 40) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
+                    if((yy - yy * 0.02)<34){
+                        gear_pos--;
+                        
+                if (gear_pos < 1) {
+                    gear_pos = 1;
+                }
+                gui.getDisplayGear().setValueAnimated(gear_pos);
+                    }
                     // gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.01);
                 } else if (current_speed > 40 && current_speed < 60) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
@@ -137,10 +152,18 @@ boolean accelerate;
 
                 } else if (current_speed > 60 && current_speed < 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
+                     if((yy - yy * 0.02)<70){
+                        gear_pos--;
+                if (gear_pos < 1) {
+                    gear_pos = 1;
+                }
+                gui.getDisplayGear().setValueAnimated(gear_pos);
+                    }
                     //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
 
                 } else if (current_speed > 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
+                    
                     //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
 
                 }

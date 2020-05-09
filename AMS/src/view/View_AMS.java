@@ -774,7 +774,7 @@ public class View_AMS extends javax.swing.JFrame {
     }
 
     private void buttonAccelerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccelerateActionPerformed
-       System.out.println("ll");
+       System.out.println("lldjfnefneffn");
        /* speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[0];
         RPM = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[1];
         GearState = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[2];
