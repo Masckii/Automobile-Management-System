@@ -222,44 +222,55 @@ public class AutoMobileManagmentSystem {
     void set_mentainace_notify(int drav) {
         if (drav > 4950 && drav <= 5000) {
             gui.getDisplayMaintenance().setValue(5000 - drav);
-            if (drav % 10 == 0) {
-                gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav));
+            if (drav % 2 == 0) {
+                gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav) + " miles");
 
             }
 
         } else if (drav >= 4750 && drav <= 4950) {
             gui.getDisplayMaintenance().setValue(5000 - drav);
 
-            if (drav % 25 == 0) {
+            if (drav % 3 == 0) {
                 gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav));
 
             }
         } else if (drav >= 9750 && drav < 9950) {
             gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            if (drav % 25 == 0) {
+            if (drav % 3 == 0) {
                 gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
 
             }
         } else if (drav >= 9950 && drav <= 10000) {
             gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            if (drav % 10 == 0) {
+            if (drav % 2 == 0) {
                 gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
 
             }
         } else if (drav >= 14750 && drav < 14950) {
             gui.getDisplayMaintenance().setValue(15000 - drav);
 
-            if (drav % 25 == 0) {
+            if (drav % 3 == 0) {
                 gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
 
             }
         } else if (drav >= 14950 && drav <= 15000) {
             gui.getDisplayMaintenance().setValue(15000 - drav);
 
-            if (drav % 10 == 0) {
+            if (drav % 2 == 0) {
                 gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
+
+            }
+        } else {
+            if (drav > 5000) {
+                gui.getDisplayMaintenance().setValue(10000 - drav);
+
+            } else if (drav > 10000) {
+                gui.getDisplayMaintenance().setValue(15000 - drav);
+
+            } else if (drav < 5000) {
+                gui.getDisplayMaintenance().setValue(5000 - drav);
 
             }
         }
