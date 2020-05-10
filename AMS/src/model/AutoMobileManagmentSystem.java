@@ -206,7 +206,11 @@ public class AutoMobileManagmentSystem {
 
     public void set_cruise_readig_handle(int cruise_speed) {
         if (cruise_state == true && gear_pos == 3) {
-            cc.setPriority(7);
+            
+            if (cruise_value!= current_speed) {
+                gui.getRadialSpeedometer().setValueAnimated(cruise_speed);
+            }
+           // cc.setPriority(7);
             System.out.println(cc.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
             System.out.println(cal.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
             gui.getDisplayCrusingSpeed().setValue(cruise_speed - 1);
