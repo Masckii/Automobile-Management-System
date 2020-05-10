@@ -95,8 +95,9 @@ public class AutoMobileManagmentSystem {
             int speedo = (int) gui.getRadialSpeedometer().getValue();
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-                if (speedo < (gear_pos * 33)) {
+                if (speedo < (gear_pos * 33)) {   
                     System.out.println("kk");
+                    
                     speedo = speedo + 5;
                     
                     rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
