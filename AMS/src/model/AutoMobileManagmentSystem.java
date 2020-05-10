@@ -91,18 +91,18 @@ public class AutoMobileManagmentSystem {
     public void PerformAcceleration(boolean state) {
         if (state == true && state_engine == true) {
             //Config.sendEvent(new events.Gear_Reading(getGear_pos()));
-            int gear;
+
             int speedo = (int) gui.getRadialSpeedometer().getValue();
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-                if (speedo < (gear_pos * 33)) {   
+                if (speedo < (gear_pos * 33)) {
                     System.out.println("kk");
-                    
+
                     speedo = speedo + 5;
-                    
+
                     rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                    if(rpm<5){
-                        rpm=5;
+                    if (rpm < 5) {
+                        rpm = 5;
                     }
 
                 }
@@ -112,34 +112,62 @@ public class AutoMobileManagmentSystem {
 
             } else {
                 //int rr=(int)gui.getRadialSpeedometer().getValue();
-                if (speedo > (gear_pos * 33)) {
-                    speedo = speedo - 5;
-                    if (speedo > 0) {
-                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                         if(rpm<5){
-                        rpm=5;
-                    }
-                    }
+                speedo = speedo - 5;
+                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                if (rpm < 5) {
+                    rpm = 5;
                 }
-                if (speedo <= (gear_pos * 33)) {
-                    speedo = speedo - 5;
-                    gear_pos--;
-                    if (gear_pos < 1) {
-                        gear_pos = 1;
-                    }
-                    if (speedo > 0) {
-                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                         if(rpm<5){
-                        rpm=5;
-                    }
-                    }
+                
+                if (speedo < 0) {
+                    speedo = 0;
                 }
+               if(speedo>0 && speedo<33 ){
+                   if(gear_pos==2){
+                       gear_pos--;
+                   }
+               }
+               if(speedo>34 && speedo<66 ){
+                   if(gear_pos==3){
+                       gear_pos--;
+                   }
+               }
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }
                 if (speedo < 0) {
                     speedo = 0;
                 }
+                /*if (speedo > (gear_pos * 33)) {
+                    speedo = speedo - 5;
+                    if (speedo > 0) {
+                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                        if (rpm < 5) {
+                            rpm = 5;
+                        }
+                    }
+
+                }
+                if (gear_pos != 3) {
+                    if (speedo < (gear_pos * 33)) {
+                        speedo = speedo - 5;
+                        gear_pos--;
+                        if (gear_pos < 1) {
+                            gear_pos = 1;
+                        }
+                        if (speedo > 0) {
+                            rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                            if (rpm < 5) {
+                                rpm = 5;
+                            }
+                        }
+                    }
+                } else {
+                    speedo = speedo - 5;
+                    if (speedo < (gear_pos * 33)) {
+                        gear_pos--;
+                    }
+                }*/
+              
             }
             System.out.println(speedo);
             gui.getRadialSpeedometer().setValueAnimated(speedo);
@@ -147,9 +175,9 @@ public class AutoMobileManagmentSystem {
             gui.getRadialRPM().setValueAnimated(rpm);
             gui.getDisplayRPM().setValueAnimated(rpm);
             gui.getDisplayGear().setValueAnimated(gear_pos);
-            gui.GearState=gear_pos;
-            gui.RPM=rpm;
-            gui.speed=speedo;
+            gui.GearState = gear_pos;
+            gui.RPM = rpm;
+            gui.speed = speedo;
             // return cruise_controll_values;
         }
     }
@@ -163,7 +191,7 @@ public class AutoMobileManagmentSystem {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
 
                     if (current_speed == 36 && gear_pos > 1) {
-                        gui.getDisplayGear().setValue(1);
+                        //  gui.getDisplayGear().setValue(1);
                     }
                     // gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.01);
                 } else if (current_speed > 40 && current_speed <= 60) {
@@ -173,7 +201,7 @@ public class AutoMobileManagmentSystem {
                 } else if (current_speed > 60 && current_speed <= 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
                     if (current_speed == 66 && gear_pos > 2) {
-                        gui.getDisplayGear().setValue(2);
+                        // gui.getDisplayGear().setValue(2);
                     }
 
                 } else if (current_speed > 80 && current_speed <= 100) {
@@ -206,11 +234,11 @@ public class AutoMobileManagmentSystem {
 
     public void set_cruise_readig_handle(int cruise_speed) {
         if (cruise_state == true && gear_pos == 3) {
-            
-            if (cruise_value!= current_speed) {
+
+            if (cruise_value != current_speed) {
                 gui.getRadialSpeedometer().setValueAnimated(cruise_speed);
             }
-           // cc.setPriority(7);
+            // cc.setPriority(7);
             System.out.println(cc.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
             System.out.println(cal.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
             gui.getDisplayCrusingSpeed().setValue(cruise_speed - 1);
@@ -218,6 +246,7 @@ public class AutoMobileManagmentSystem {
             this.current_speed = cruise_speed;
 
         } else {
+
             gui.getDisplayCrusingSpeed().setValue(0);
         }
     }
