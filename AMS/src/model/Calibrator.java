@@ -33,7 +33,7 @@ public class Calibrator extends Thread {
            
 
             try {
-                this.sleep(1000000);
+                this.sleep(1000);
                 ams.drop_speed_automatic();
             } catch (InterruptedException ex) {
                Logger.getLogger(Calibrator.class.getName()).log(Level.SEVERE, null, ex);

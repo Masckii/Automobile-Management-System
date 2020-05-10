@@ -24,6 +24,8 @@ public class AutoMobileManagmentSystem {
     private int trip_start_time = 0;
     private boolean trip_state = false;
     private static int time_counter_sec = 0;
+    private static int time_counter_trip = 0;
+    private static int speed_counter_trip = 0;
     private static int average_speed = 0;
     private static float distance = 0;
     private int dreive_shaft_rotation = 0;
@@ -37,8 +39,8 @@ public class AutoMobileManagmentSystem {
     private Calibrator cal;
     private Fuel_Sensor fs;
     private model.Timer timer;
-boolean accelerate;
-     double rpm=0;
+    boolean accelerate;
+    double rpm = 0;
     //therad
     //private model.Fuel_Sensor fuel_sensor;
     // private model.Led_light led_light;
@@ -59,7 +61,7 @@ boolean accelerate;
         cc = new CruiseController(this);
         dss = new DriveShaftSensor(this);
         timer = new Timer(this);
-        current_speed =0;
+        current_speed = 0;
         gui = new View_AMS();
         gui.setVisible(true);
         gui.setLocationRelativeTo(null);
@@ -70,7 +72,8 @@ boolean accelerate;
         dss.start();
         cc.start();
     }
- public void setRpm(double rpm) {
+
+    public void setRpm(double rpm) {
         this.rpm = rpm;
     }
 
@@ -81,69 +84,70 @@ boolean accelerate;
     public void setAccelerate(boolean accelerate) {
         this.accelerate = accelerate;
     }
-   public void  PerformAcceleration(boolean state) {
-        if(state==true){
-            int speedo=(int)gui.getRadialSpeedometer().getValue();
-        if (accelerate == true) {
-          // int rr=(int)gui.getRadialSpeedometer().getValue();
-            if (speedo < (gear_pos * 33)) {
-                System.out.println("kk");
-                speedo = speedo + 5;
-                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
 
-            }
-            if (speedo > 99) {
-                speedo = 99;
-            }
+    public void PerformAcceleration(boolean state) {
+        if (state == true && state_engine) {
+            int speedo = (int) gui.getRadialSpeedometer().getValue();
+            if (accelerate == true) {
+                // int rr=(int)gui.getRadialSpeedometer().getValue();
+                if (speedo < (gear_pos * 33)) {
+                    System.out.println("kk");
+                    speedo = speedo + 5;
+                    rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
 
-        } else {
-            //int rr=(int)gui.getRadialSpeedometer().getValue();
-            if ( speedo > (gear_pos * 33)) {
-                 speedo = speedo - 5;
-                 if(speedo>0){
-                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                 }
-            }
-            if (speedo <= (gear_pos * 33)) {
-                speedo = speedo - 5;
-                gear_pos--;
+                }
+                if (speedo > 99) {
+                    speedo = 99;
+                }
+
+            } else {
+                //int rr=(int)gui.getRadialSpeedometer().getValue();
+                if (speedo > (gear_pos * 33)) {
+                    speedo = speedo - 5;
+                    if (speedo > 0) {
+                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                    }
+                }
+                if (speedo <= (gear_pos * 33)) {
+                    speedo = speedo - 5;
+                    gear_pos--;
+                    if (gear_pos < 1) {
+                        gear_pos = 1;
+                    }
+                    if (speedo > 0) {
+                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                    }
+                }
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }
-                if(speedo>0){
-                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                if (speedo < 0) {
+                    speedo = 0;
                 }
             }
-            if (gear_pos < 1) {
-                gear_pos = 1;
-            }
-            if (speedo < 0) {
-                speedo = 0;
-            }
+            System.out.println(speedo);
+            gui.getRadialSpeedometer().setValueAnimated(speedo);
+            //  gui.getDisplayCrusingSpeed().setValueAnimated(rr);
+            gui.getRadialRPM().setValueAnimated(rpm);
+            gui.getDisplayRPM().setValueAnimated(rpm);
+            gui.getDisplayGear().setValueAnimated(gear_pos);
+            // return cruise_controll_values;
         }
-        System.out.println(speedo);
-        gui.getRadialSpeedometer().setValueAnimated(speedo);
-      //  gui.getDisplayCrusingSpeed().setValueAnimated(rr);
-        gui.getRadialRPM().setValueAnimated(rpm);
-        gui.getDisplayRPM().setValueAnimated(rpm);
-        gui.getDisplayGear().setValueAnimated(gear_pos);
-       // return cruise_controll_values;
-}
     }
 
     public void drop_speed_automatic() {
         try {
-            double yy=gui.getRadialSpeedometer().getValue();
+            double yy = gui.getRadialSpeedometer().getValue();
             if (state_engine == true && current_speed > 0) {
                 if (current_speed > 20 && current_speed < 40) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
-                    if((yy - yy * 0.02)<34){
+                    if ((yy - yy * 0.02) < 34) {
                         gear_pos--;
-                        
-                if (gear_pos < 1) {
-                    gear_pos = 1;
-                }
-                gui.getDisplayGear().setValueAnimated(gear_pos);
+
+                        if (gear_pos < 1) {
+                            gear_pos = 1;
+                        }
+                        gui.getDisplayGear().setValueAnimated(gear_pos);
                     }
                     // gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.01);
                 } else if (current_speed > 40 && current_speed < 60) {
@@ -152,20 +156,19 @@ boolean accelerate;
 
                 } else if (current_speed > 60 && current_speed < 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                     if((yy - yy * 0.02)<70){
+                    if ((yy - yy * 0.02) < 70) {
                         gear_pos--;
-                if (gear_pos < 1) {
-                    gear_pos = 1;
-                }
-                gui.getDisplayGear().setValueAnimated(gear_pos);
+                        if (gear_pos < 1) {
+                            gear_pos = 1;
+                        }
+                        gui.getDisplayGear().setValueAnimated(gear_pos);
                     }
                     //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
 
                 } else if (current_speed > 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                    
-                    //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
 
+                    //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
                 }
             } else {
                 gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
@@ -177,7 +180,7 @@ boolean accelerate;
     }
 
     public void get_cruise_update() {
-        if (cruise_state == true&&gear_pos==3) {
+        if (cruise_state == true && gear_pos == 3) {
             cc.setState(CruiseControllerState.ACTIVATE);
             cc.setCruise_res_value(current_speed);
 
@@ -190,7 +193,7 @@ boolean accelerate;
     }
 
     public void set_cruise_readig_handle(int cruise_speed) {
-        if (cruise_state == true&&gear_pos==3) {
+        if (cruise_state == true && gear_pos == 3) {
             System.out.println("model.AutoMobileManagmentSystem.set_cruise_readig_handle()");
             gui.getDisplayCrusingSpeed().setValue(cruise_value);
             this.current_speed = cruise_value;
@@ -205,8 +208,11 @@ boolean accelerate;
     }
 
     public void setEngineState(boolean state_engine) {
-        this.state_engine = state_engine;
-        set_bulb_on();
+        if (fuel_reading > 0) {
+            this.state_engine = state_engine;
+            set_bulb_on();
+        }
+
     }
 
     void set_bulb_on() {
@@ -295,7 +301,12 @@ boolean accelerate;
     }
 
     void set_average_speed() {
+        float average_speedin = 0;
         if (trip_state == true) {
+            time_counter_trip++;
+            speed_counter_trip += current_speed;
+            average_speedin = speed_counter_trip / time_counter_trip;
+            gui.getDisplaytrip().setValueAnimated(average_speedin);
 
         }
 
@@ -345,14 +356,19 @@ boolean accelerate;
 
             }
         } else {
-            if (drav > 5000) {
+            if (drav > 5000&&drav<10000) {
                 gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            } else if (drav > 10000) {
+            } else if (drav > 10000&&drav<15000) {
                 gui.getDisplayMaintenance().setValue(15000 - drav);
 
             } else if (drav < 5000) {
                 gui.getDisplayMaintenance().setValue(5000 - drav);
+
+            }
+            else if(drav == 5000 || drav == 10000 || drav == 15000)
+            {
+                gui.getScreen().setText("");
 
             }
         }
@@ -368,7 +384,18 @@ boolean accelerate;
     }
 
     public void setFuel_reading(int fuel_reading) {
-        this.fuel_reading = fuel_reading;
+        if (fuel_reading == 0) {
+            this.state_engine = false;
+
+        } else {
+            this.fuel_reading = fuel_reading;
+
+        }
+
+    }
+
+    void mantain_butn_clear_display() {
+        gui.getScreen().setText("");
 
     }
 
@@ -377,7 +404,7 @@ boolean accelerate;
     }
 
     public void setCruise_state(boolean cruise_state) {
-        if (cruise_state == true &&gear_pos==3) {
+        if (cruise_state == true && gear_pos == 3) {
             gui.getCrusing_lightBulb1().setOn(true);
             cruise_value = current_speed;
             this.cruise_state = true;
@@ -419,7 +446,13 @@ boolean accelerate;
     }
 
     public void setTrip_state(boolean trip_state) {
-        gui.getTripbulb().setOn(trip_state);
+        for (int i = 0; i < 3; i++) {
+            gui.getTripbulb().setOn(trip_state);
+            
+
+        }
+        time_counter_sec = 0;
+        speed_counter_trip = 0;
         this.trip_state = trip_state;
     }
 
@@ -438,11 +471,7 @@ boolean accelerate;
         return Clabirator_state;
     }
 
-    public void setClabirator_state(boolean Clabirator_state) {
 
-        gui.getClibirate_lightBulb().setOn(Clabirator_state);
-        this.Clabirator_state = Clabirator_state;
-    }
 
     public void set_speedOmeter(int speed_in) {
         current_speed = speed_in;

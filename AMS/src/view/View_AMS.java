@@ -40,7 +40,7 @@ public class View_AMS extends javax.swing.JFrame {
     /**
      * Creates new form View_AMS
      */
-    static int  speed = 0;
+    static int speed = 0;
     static double RPM = 0.0;
     static int GearState = 1;
     static boolean enginestate = false;
@@ -241,13 +241,11 @@ public class View_AMS extends javax.swing.JFrame {
         buttonFirstGear = new javax.swing.JButton();
         buttonSecondGear = new javax.swing.JButton();
         buttonThirdGear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        clibirate_lightBulb = new eu.hansolo.lightbulb.LightBulb();
-        jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         lightBulb3 = new eu.hansolo.lightbulb.LightBulb();
         crusing_lightBulb1 = new eu.hansolo.lightbulb.LightBulb();
+        Maintenance_done_button = new javax.swing.JButton();
         radialFuel = new eu.hansolo.steelseries.gauges.Radial1Lcd();
         radialRPM = new eu.hansolo.steelseries.gauges.Radial4();
         displayCrusingSpeed = new eu.hansolo.steelseries.gauges.DisplaySingle();
@@ -267,6 +265,7 @@ public class View_AMS extends javax.swing.JFrame {
         butonStopTrip = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Tripbulb = new eu.hansolo.lightbulb.LightBulb();
+        displaytrip = new eu.hansolo.steelseries.gauges.DisplaySingle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Automobile Management System");
@@ -369,19 +368,7 @@ public class View_AMS extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Start calibirate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Stop calibirate");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        Maintenance_done_button.setText("Maintenance done");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -390,6 +377,9 @@ public class View_AMS extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -439,21 +429,15 @@ public class View_AMS extends javax.swing.JFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(Maintenance_done_button, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(127, 127, 127))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(211, 211, 211))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButton2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clibirate_lightBulb, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGap(208, 208, 208))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,11 +445,13 @@ public class View_AMS extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addGap(13, 13, 13)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Maintenance_done_button)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -510,16 +496,9 @@ public class View_AMS extends javax.swing.JFrame {
                                     .addComponent(buttonThirdGear)
                                     .addComponent(jLabel7)))
                             .addComponent(lightBulb3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(clibirate_lightBulb, javax.swing.GroupLayout.PREFERRED_SIZE, 60, Short.MAX_VALUE))
-                        .addGap(22, 22, 22))))
+                        .addGap(101, 101, 101))))
         );
 
         radialFuel.setMaxValue(10.0);
@@ -582,7 +561,7 @@ public class View_AMS extends javax.swing.JFrame {
             }
         });
 
-        butonStopTrip.setText("Stop Trip");
+        butonStopTrip.setText("Puase Trip");
         butonStopTrip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butonStopTripActionPerformed(evt);
@@ -603,29 +582,34 @@ public class View_AMS extends javax.swing.JFrame {
                     .addComponent(displayRPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(displayCrusingSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel9)
+                                .addGap(122, 122, 122)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(248, 248, 248)
+                                .addComponent(displayMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(displayMilesDriven, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonStartTrip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(butonStopTrip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(displayCrusingSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(displayMaintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(displayMilesDriven, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonStartTrip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(butonStopTrip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(displaytrip, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
@@ -690,13 +674,14 @@ public class View_AMS extends javax.swing.JFrame {
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(displayMilesDriven, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Tripbulb, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(buttonStartTrip)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(butonStopTrip))))
-                        .addGap(29, 29, 29)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Tripbulb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buttonStartTrip))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(butonStopTrip)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(displaytrip, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -774,8 +759,8 @@ public class View_AMS extends javax.swing.JFrame {
     }
 
     private void buttonAccelerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAccelerateActionPerformed
-       System.out.println("lldjfnefneffn");
-       /* speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[0];
+        System.out.println("lldjfnefneffn");
+        /* speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[0];
         RPM = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[1];
         GearState = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, true)[2];
         radialSpeedometer.setValueAnimated(speed);
@@ -785,17 +770,17 @@ public class View_AMS extends javax.swing.JFrame {
             displayRPM.setValueAnimated(RPM);
         }*/
         //displayGear.setValueAnimated(GearState);
-        
-       Config.sendEvent(new AccelerateEvent((true)));
-       Config.sendEvent(new SpeedOMeterReading((speed)));
-       Config.sendEvent(new Gear_Reading((GearState)));
-       Config.sendEvent(new RpmEvent((RPM)));
-       Config.sendEvent(new PerformEvent(true));
+
+        Config.sendEvent(new AccelerateEvent((true)));
+        Config.sendEvent(new SpeedOMeterReading((speed)));
+        Config.sendEvent(new Gear_Reading((GearState)));
+        Config.sendEvent(new RpmEvent((RPM)));
+        Config.sendEvent(new PerformEvent(true));
 
     }//GEN-LAST:event_buttonAccelerateActionPerformed
 
     private void buttonBrakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBrakeActionPerformed
-       /* speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, false)[0];
+        /* speed = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, false)[0];
         RPM = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, false)[1];
         GearState = esper.Main.ams.PerformAcceleration(speed, GearState, RPM, false)[2];
         displayCrusingSpeed.setValueAnimated(speed);
@@ -806,12 +791,11 @@ public class View_AMS extends javax.swing.JFrame {
             displayRPM.setValueAnimated(RPM);
         }
         displayGear.setValueAnimated(GearState);*/
-        System.out.println("ll");
-         Config.sendEvent(new BrakeEvent((false)));
-       Config.sendEvent(new SpeedOMeterReading((speed)));
-       Config.sendEvent(new Gear_Reading((GearState)));
-       Config.sendEvent(new RpmEvent((RPM)));
-       Config.sendEvent(new PerformEvent(true));
+        Config.sendEvent(new BrakeEvent((false)));
+        Config.sendEvent(new SpeedOMeterReading((speed)));
+        Config.sendEvent(new Gear_Reading((GearState)));
+        Config.sendEvent(new RpmEvent((RPM)));
+        Config.sendEvent(new PerformEvent(true));
     }//GEN-LAST:event_buttonBrakeActionPerformed
 
     private void buttonFirstGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFirstGearActionPerformed
@@ -824,6 +808,14 @@ public class View_AMS extends javax.swing.JFrame {
         Config.sendEvent(new events.TripEvent(true));
 
     }//GEN-LAST:event_buttonStartTripActionPerformed
+
+    public JButton getMaintenance_done_button() {
+        return Maintenance_done_button;
+    }
+
+    public DisplaySingle getDisplaytrip() {
+        return displaytrip;
+    }
 
     private void buttonSecondGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSecondGearActionPerformed
         GearState = 2;
@@ -839,18 +831,6 @@ public class View_AMS extends javax.swing.JFrame {
 
     }//GEN-LAST:event_butonStopTripActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Config.sendEvent(new events.Calibirator_state_reading(true));
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Config.sendEvent(new events.Calibirator_state_reading(false));
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -862,13 +842,6 @@ public class View_AMS extends javax.swing.JFrame {
         this.Tripbulb = Tripbulb;
     }
 
-    public LightBulb getClibirate_lightBulb() {
-        return clibirate_lightBulb;
-    }
-
-    public void setClibirate_lightBulb(LightBulb clibirate_lightBulb) {
-        this.clibirate_lightBulb = clibirate_lightBulb;
-    }
 
     public LightBulb getCrusing_lightBulb1() {
         return crusing_lightBulb1;
@@ -887,6 +860,7 @@ public class View_AMS extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Maintenance_done_button;
     private eu.hansolo.lightbulb.LightBulb Tripbulb;
     private javax.swing.JButton butonStopTrip;
     private javax.swing.JToggleButton buttonAccelerate;
@@ -900,7 +874,6 @@ public class View_AMS extends javax.swing.JFrame {
     private javax.swing.JButton buttonStopCruise;
     private javax.swing.JButton buttonStopEngine;
     private javax.swing.JButton buttonThirdGear;
-    private eu.hansolo.lightbulb.LightBulb clibirate_lightBulb;
     private eu.hansolo.steelseries.gauges.Clock clock1;
     private eu.hansolo.lightbulb.LightBulb crusing_lightBulb1;
     private eu.hansolo.steelseries.gauges.DigitalRadial digitalRadial1;
@@ -910,9 +883,8 @@ public class View_AMS extends javax.swing.JFrame {
     private eu.hansolo.steelseries.gauges.DisplaySingle displayMaintenance;
     private eu.hansolo.steelseries.gauges.DisplaySingle displayMilesDriven;
     private eu.hansolo.steelseries.gauges.DisplaySingle displayRPM;
+    private eu.hansolo.steelseries.gauges.DisplaySingle displaytrip;
     private eu.hansolo.steelseries.gauges.DisplayCircular driveshaft_display;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

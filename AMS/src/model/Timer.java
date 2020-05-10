@@ -33,6 +33,7 @@ public class Timer extends Thread{
                 
                Logger.getLogger(model.Calibrator.class.getName()).log(Level.SEVERE, null, ex);
             }
+            ams.set_average_speed();
             ams.set_distance_driven();
               //System.out.println("speed : "+ams.get_speedOmeter());
                 //Config.sendEvent(new events.Gear_Reading( ams.getGear_pos()));
