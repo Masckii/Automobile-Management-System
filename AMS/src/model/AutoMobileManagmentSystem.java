@@ -90,6 +90,8 @@ public class AutoMobileManagmentSystem {
 
     public void PerformAcceleration(boolean state) {
         if (state == true && state_engine == true) {
+            //Config.sendEvent(new events.Gear_Reading(getGear_pos()));
+            int gear;
             int speedo = (int) gui.getRadialSpeedometer().getValue();
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
@@ -134,6 +136,7 @@ public class AutoMobileManagmentSystem {
             gui.getRadialRPM().setValueAnimated(rpm);
             gui.getDisplayRPM().setValueAnimated(rpm);
             gui.getDisplayGear().setValueAnimated(gear_pos);
+            gui.GearState=gear_pos;
             // return cruise_controll_values;
         }
     }

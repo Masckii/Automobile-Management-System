@@ -40,10 +40,10 @@ public class View_AMS extends javax.swing.JFrame {
     /**
      * Creates new form View_AMS
      */
-    static int speed = 0;
-    static double RPM = 0.0;
-    static int GearState = 1;
-    static boolean enginestate = false;
+    public static int speed = 0;
+    public static double RPM = 0.0;
+    public static int GearState = 1;
+    public static boolean enginestate = false;
 
     public View_AMS() {
         initComponents();
