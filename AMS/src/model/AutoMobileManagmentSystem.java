@@ -98,7 +98,11 @@ public class AutoMobileManagmentSystem {
                 if (speedo < (gear_pos * 33)) {
                     System.out.println("kk");
                     speedo = speedo + 5;
+                    
                     rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                    if(rpm<5){
+                        rpm=5;
+                    }
 
                 }
                 if (speedo > 99) {
@@ -111,6 +115,9 @@ public class AutoMobileManagmentSystem {
                     speedo = speedo - 5;
                     if (speedo > 0) {
                         rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                         if(rpm<5){
+                        rpm=5;
+                    }
                     }
                 }
                 if (speedo <= (gear_pos * 33)) {
@@ -121,6 +128,9 @@ public class AutoMobileManagmentSystem {
                     }
                     if (speedo > 0) {
                         rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                         if(rpm<5){
+                        rpm=5;
+                    }
                     }
                 }
                 if (gear_pos < 1) {
