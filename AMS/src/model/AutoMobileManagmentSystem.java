@@ -117,20 +117,20 @@ public class AutoMobileManagmentSystem {
                 if (rpm < 5) {
                     rpm = 5;
                 }
-                
+
                 if (speedo < 0) {
                     speedo = 0;
                 }
-               if(speedo>0 && speedo<33 ){
-                   if(gear_pos==2){
-                       gear_pos--;
-                   }
-               }
-               if(speedo>34 && speedo<66 ){
-                   if(gear_pos==3){
-                       gear_pos--;
-                   }
-               }
+                if (speedo > 0 && speedo < 33) {
+                    if (gear_pos == 2) {
+                        gear_pos--;
+                    }
+                }
+                if (speedo > 34 && speedo < 66) {
+                    if (gear_pos == 3) {
+                        gear_pos--;
+                    }
+                }
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }
@@ -167,7 +167,7 @@ public class AutoMobileManagmentSystem {
                         gear_pos--;
                     }
                 }*/
-              
+
             }
             System.out.println(speedo);
             gui.getRadialSpeedometer().setValueAnimated(speedo);
@@ -282,13 +282,13 @@ public class AutoMobileManagmentSystem {
     }
 
     public int getDreive_shaft_rotation() {
-        return ((int) gui.getDriveshaft_display().getValue()) + 1;
+        return ((int) gui.getDriveshaft_display().getValue());
     }
 
-    public void setDreive_shaft_rotation(int dreive_shaft_rotation) {
+    public void setDreive_shaft_rotation(float dreive_shaft_rotation) {
 
-        gui.getDriveshaft_display().setValue(generates_drive_shaft());
-        this.dreive_shaft_rotation = dreive_shaft_rotation;
+        gui.getDriveshaft_display().setValue(dreive_shaft_rotation);
+        this.dreive_shaft_rotation = (int) dreive_shaft_rotation;
 
     }
 
@@ -303,33 +303,14 @@ public class AutoMobileManagmentSystem {
     }
 
     float generates_drive_shaft() {
-        if (state_engine == true) {
-            try {
-                Config.sendEvent(new SpeedOMeterReading(get_speedOmeter()));
+        if (state_engine == true ) {
+            
+                if (current_speed > 0 && current_speed <= 100) {
+                    float dss_gen =  (float) ((current_speed*0.05 ) * (5.0 / 6.0) * 60 * 2 + random(1, 2));
 
-                if (current_speed >= 20 && current_speed < 40) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.34 * current_speed / 4 + random(1, 2) * random(1, 5));
-                    return dss_gen;
-
-                } else if (current_speed >= 40 && current_speed < 60) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.30 * current_speed / 4 + random(2, 3) * random(1, 5));
-                    return dss_gen;
-
-                } else if (current_speed >= 60 && current_speed < 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.25 * current_speed / 4 + random(3, 4) * random(1, 5));
-                    return dss_gen;
-
-                } else if (current_speed >= 80) {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * current_speed / 4 + random(4, 5) * random(1, 5));
-                    return dss_gen;
-
-                } else {
-                    float dss_gen = (float) (1000 * gear_pos * gear_pos * 0.2 * current_speed / 4 + random(1, 2) * random(1, 2));
                     return dss_gen;
 
                 }
-            } catch (Exception e) {
-            }
 
         }
 
@@ -337,12 +318,13 @@ public class AutoMobileManagmentSystem {
     }
 
     void set_distance_driven() {
-        if (state_engine && current_speed > 0 && dreive_shaft_rotation > 0) {
-
+        if (state_engine && current_speed > 0) {
             // distance += current_speed * time_counter_sec / 100;
-            distance += dreive_shaft_rotation / 1000;
-            messsured_speed = (int) (dreive_shaft_rotation * 1.7) / 100;
-            System.err.println("messsured_speed " + messsured_speed);
+            float temp = 0;
+
+            distance += generates_drive_shaft()/1000;
+            setDreive_shaft_rotation(generates_drive_shaft());
+
             set_mentainace_notify((int) distance);
             decrease_fuel((int) distance, fuel_reading);
             float dradial = distance / 165; //13*(10+20) led light
