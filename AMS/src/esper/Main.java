@@ -84,13 +84,7 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-        Config.createStatement("select calibirator_state from Calibirator_state_reading")
-                .setSubscriber(new Object() {
-                    public void update(boolean gl) throws InterruptedException {
-                        ams.setClabirator_state(gl);
-                        //  System.err.println("in fuel");
-                    }
-                });
+  
         
                 Config.createStatement("select value from Cruise_con_Reading")
                 .setSubscriber(new Object() {
