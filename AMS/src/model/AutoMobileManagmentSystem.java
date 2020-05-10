@@ -147,6 +147,8 @@ public class AutoMobileManagmentSystem {
             gui.getDisplayRPM().setValueAnimated(rpm);
             gui.getDisplayGear().setValueAnimated(gear_pos);
             gui.GearState=gear_pos;
+            gui.RPM=rpm;
+            gui.speed=speedo;
             // return cruise_controll_values;
         }
     }
