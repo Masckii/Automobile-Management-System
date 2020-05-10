@@ -8,6 +8,7 @@ package model;
 import esper.Config;
 import events.SpeedOMeterReading;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,6 +43,7 @@ public class CruiseController extends Thread {
 
     public void Activate_Cruise_control() {
         if (state == CruiseControllerState.ACTIVATE) {
+            System.out.println("CRRUISSS ACTIVATE init_value " + init_value);
             Config.sendEvent(new events.Cruise_con_Reading(init_value));
 
         }
@@ -89,19 +91,22 @@ public class CruiseController extends Thread {
 
     @Override
     public void run() {
+
         while (true) {
-            ams.get_cruise_update();
 
             try {
-                System.out.println("model.CruiseController.run()" + this.toString());
+
+                ams.get_cruise_update();
                 this.sleep(900);
+
+                //if active or deactive or resume
+                Activate_Cruise_control();
+                //  Deactivate_Cruise_control();
+                // Res_Cruise_control();
             } catch (InterruptedException ex) {
                 Logger.getLogger(CruiseController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //if active or deactive or resume
-            Activate_Cruise_control();
-            Deactivate_Cruise_control();
-            Res_Cruise_control();
+
         }
     }
 

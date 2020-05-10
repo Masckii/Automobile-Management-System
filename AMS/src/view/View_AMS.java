@@ -47,7 +47,7 @@ public class View_AMS extends javax.swing.JFrame {
 
     public View_AMS() {
         initComponents();
-
+        
     }
 
     public DisplayCircular getDriveshaft_display() {
