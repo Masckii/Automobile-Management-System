@@ -414,7 +414,6 @@ public class AutoMobileManagmentSystem {
     public void decrease_fuel() {
 
         try {
-            System.out.println("remmmmmmmmmmmm " + distance %  Integer.valueOf((int) gui.getDisplayAvgFuel().getValue()+""));
 
             if (distance % 2 == 0) {
                 gui.getRadialFuel().setValue(--fuel_reading);
