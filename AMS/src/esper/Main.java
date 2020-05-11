@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Omar Shan
+ * @author Group 7
  */
 public class Main {
 
