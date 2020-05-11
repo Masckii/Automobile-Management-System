@@ -35,6 +35,7 @@ public class Calibrator extends Thread {
             try {
                 this.sleep(1000);
                 //ams.drop_speed_automatic();
+                ams.add_rpm_number();
             } catch (InterruptedException ex) {
                Logger.getLogger(Calibrator.class.getName()).log(Level.SEVERE, null, ex);
             }

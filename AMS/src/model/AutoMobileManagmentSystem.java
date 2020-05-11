@@ -6,7 +6,6 @@
 package model;
 
 import esper.Config;
-import events.SpeedOMeterReading;
 import java.util.Random;
 import view.View_AMS;
 
@@ -19,7 +18,6 @@ public class AutoMobileManagmentSystem {
     //--engine
     private boolean state_engine = false;
     private int current_speed;
-    private int messsured_speed = 0;
     private boolean cruise_state = false;
     private int fuel_reading = 0;
     private int gear_pos = 0;
@@ -29,6 +27,7 @@ public class AutoMobileManagmentSystem {
     private static int time_counter_trip = 0;
     private static int speed_counter_trip = 0;
     private static int average_speed = 0;
+    private static int rpm_total = 0;
     private static float distance = 0;
     private int dreive_shaft_rotation = 0;
     private boolean Clabirator_state;
@@ -239,9 +238,8 @@ public class AutoMobileManagmentSystem {
                 gui.getRadialSpeedometer().setValueAnimated(cruise_speed);
             }
             // cc.setPriority(7);
-            System.out.println(cc.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
-            System.out.println(cal.getPriority() + " model.AutoMobileManagmentSystem.set_cruise_readig_handle()" + cruise_speed);
-            gui.getDisplayCrusingSpeed().setValue(cruise_speed - 1);
+
+            gui.getDisplayCrusingSpeed().setValue(cruise_speed );
 
             this.current_speed = cruise_speed;
 
@@ -345,6 +343,13 @@ public class AutoMobileManagmentSystem {
 
         }
 
+    }
+    void set_average_fuel_distance()
+    {
+        if (state_engine==true&&fuel_reading>0&&distance>0) {
+            
+            gui.getDisplayAvgFuel().setValueAnimated(((rpm_total/time_counter_sec)/10)+2);
+        }
     }
 
     void set_mentainace_notify(int drav) {
@@ -517,5 +522,10 @@ public class AutoMobileManagmentSystem {
         System.err.println("cruise_value : " + cruise_value);
         System.err.println("drivesaft rot  : " + dreive_shaft_rotation);
 
+    }
+
+    void add_rpm_number() {
+        rpm_total += gui.getDisplayRPM().getValue();
+        
     }
 }
