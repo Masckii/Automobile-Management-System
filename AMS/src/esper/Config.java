@@ -19,6 +19,7 @@ import events.BrakeEvent;
 import events.Calibirator_state_reading;
 import events.Cruise_state_reading;
 import events.Drive_shaft_reading;
+import events.Mintainace_done;
 import events.PerformEvent;
 import events.RpmEvent;
 
@@ -46,8 +47,8 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(Mintainace_done.class);
        
         engine.getEPAdministrator().getConfiguration().addEventType(RpmEvent.class);
          engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);

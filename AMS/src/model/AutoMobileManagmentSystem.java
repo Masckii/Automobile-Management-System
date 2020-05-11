@@ -504,7 +504,7 @@ public class AutoMobileManagmentSystem {
             gui.getTripbulb().setOn(trip_state);
 
         }
-        time_counter_sec = 0;
+        time_counter_trip = 0;
         speed_counter_trip = 0;
         this.trip_state = trip_state;
     }
