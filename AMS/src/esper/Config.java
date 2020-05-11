@@ -9,6 +9,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import events.AccelerateEvent;
+import events.Accelerate_cruise;
 import events.CalibratorSensorReading;
 import events.Cruise_con_Reading;
 import events.Fuel_Reading;
@@ -47,8 +48,9 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);//Accelerate_cruise
         engine.getEPAdministrator().getConfiguration().addEventType(Mintainace_done.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(Accelerate_cruise.class);
        
         engine.getEPAdministrator().getConfiguration().addEventType(RpmEvent.class);
          engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);

@@ -109,7 +109,7 @@ public class Main {
                 });
         Config.createStatement("select speed from SpeedOMeterReading")
                 .setSubscriber(new Object() {
-                    public void update(int gl) throws InterruptedException {
+                    public void update(int gl) throws InterruptedException {//
                         ams.set_speedOmeter(gl);
                         //  System.err.println("in fuel");
                     }
@@ -118,6 +118,13 @@ public class Main {
                 .setSubscriber(new Object() {
                     public void update(int gl) throws InterruptedException {
                         ams.setGear_pos(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
+                Config.createStatement("select cruise_value from Accelerate_cruise")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                          ams.accelearate_cruise_value(gl);
                         //  System.err.println("in fuel");
                     }
                 });
@@ -135,7 +142,13 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-        
+                Config.createStatement("select state from Mintainace_done")
+                .setSubscriber(new Object() {
+                    public void update(boolean gl) throws InterruptedException {
+                         ams.setMaintainance_state(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
 
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")

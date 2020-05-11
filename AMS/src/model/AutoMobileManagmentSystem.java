@@ -33,6 +33,8 @@ public class AutoMobileManagmentSystem {
     private boolean Clabirator_state;
     private static int cruise_value;
     private boolean accelerate;
+    private boolean maintainance_state;
+    private static int change_stage = 1;
     private double rpm = 0;
     //-- compunents of our AMS 
     private CruiseController cc;
@@ -42,7 +44,8 @@ public class AutoMobileManagmentSystem {
     private Calibrator cal;
     private Fuel_Sensor fs;
     private model.Timer timer;
-
+    private model.Monitor mon;
+    private model.ServiceCompletion ser_com;
     //therad
     //private model.Fuel_Sensor fuel_sensor;
     // private model.Led_light led_light;
@@ -56,12 +59,15 @@ public class AutoMobileManagmentSystem {
         Clabirator_state = false;
         cruise_value = 0;
         cruise_state = false;
+        maintainance_state = false;
+        ser_com = ServiceCompletion.SERVICE_INCOMPLETE;
         //
         cal = new Calibrator(this);
         fs = new Fuel_Sensor(this);
         grs = new Gear_sensor(this);
         cc = new CruiseController(this);
         dss = new DriveShaftSensor(this);
+        mon = new Monitor(this);
         timer = new Timer(this);
         current_speed = 0;
         gui = new View_AMS();
@@ -73,6 +79,7 @@ public class AutoMobileManagmentSystem {
         grs.start();
         timer.start();
         dss.start();
+        mon.start();
     }
 
     public void setRpm(double rpm) {
@@ -88,6 +95,7 @@ public class AutoMobileManagmentSystem {
     }
 
     public void PerformAcceleration(boolean state) {
+
         if (state == true && state_engine == true) {
             //Config.sendEvent(new events.Gear_Reading(getGear_pos()));
 
@@ -95,7 +103,6 @@ public class AutoMobileManagmentSystem {
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
                 if (speedo < (gear_pos * 33)) {
-                    System.out.println("kk");
 
                     speedo = speedo + 5;
 
@@ -183,6 +190,7 @@ public class AutoMobileManagmentSystem {
 
     public void drop_speed_automatic() {
         try {
+
             Config.sendEvent(new events.Gear_Reading(getGear_pos()));
             // Config.sendEvent(new SpeedOMeterReading(get_speedOmeter()));
             if (state_engine == true && current_speed > 0) {
@@ -225,7 +233,7 @@ public class AutoMobileManagmentSystem {
             //---
             cc.Res_Cruise_control(gui);
 
-        } else if (cruise_state == true && gear_pos == 3&& current_speed == cruise_value) {
+        } else if (cruise_state == true && gear_pos == 3 && current_speed == cruise_value) {
             cc.setState(CruiseControllerState.ACTIVATE);
             cc.setInit_value(cruise_value);
             cc.setCruise_res_value(current_speed);
@@ -239,6 +247,17 @@ public class AutoMobileManagmentSystem {
 
         }
 
+    }
+
+    public boolean isMaintainance_state() {
+        return maintainance_state;
+    }
+
+    public void setMaintainance_state(boolean maintainance_state) {
+        this.maintainance_state = maintainance_state;
+        change_stage++;
+        gui.getMaintenance_done_button().setVisible(false);
+        gui.getScreen().setText("<<NO Maintinance Needed>>");
     }
 
     public void set_cruise_readig_handle(int cruise_speed) {
@@ -312,11 +331,17 @@ public class AutoMobileManagmentSystem {
 
     float generates_drive_shaft() {
         if (state_engine == true) {
-
             if (current_speed > 0 && current_speed <= 100) {
-                float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 + random(1, 2));
+                try {
+                    int speed_time = Integer.valueOf(gui.getSpeed_time().getText());
 
-                return dss_gen;
+                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 * speed_time + random(1, 3));
+                    return dss_gen;
+                } catch (Exception e) {
+
+                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 + random(1, 3));
+                    return dss_gen;
+                }
 
             }
 
@@ -362,59 +387,49 @@ public class AutoMobileManagmentSystem {
     }
 
     void set_mentainace_notify(int drav) {
-        if (drav > 4950 && drav <= 5000) {
-            gui.getDisplayMaintenance().setValue(5000 - drav);
-            if (drav % 5 == 0) {
-                gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav) + " miles");
+        int miles_done = 5000;
 
-            }
-
-        } else if (drav >= 4750 && drav <= 4950) {
-            gui.getDisplayMaintenance().setValue(5000 - drav);
-
-            if (drav % 10 == 0) {
-                gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 - drav));
-
-            }
-        } else if (drav >= 9750 && drav < 9950) {
-            gui.getDisplayMaintenance().setValue(10000 - drav);
-
-            if (drav % 10 == 0) {
-                gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
-
-            }
-        } else if (drav >= 9950 && drav <= 10000) {
-            gui.getDisplayMaintenance().setValue(10000 - drav);
+        if (drav > (5000 * change_stage) - 50 && drav <= 5000 * change_stage) {
+            gui.getDisplayMaintenance().setValue(5000 * change_stage - drav);
 
             if (drav % 5 == 0) {
-                gui.getScreen().setText("There is required maintenance ->   air filter change : " + (10000 - drav));
+                if (change_stage == 1) {
+                    gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 * change_stage - drav) + " miles");
 
+                } else if (change_stage == 2) {
+                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
+
+                } else if (change_stage == 3) {
+                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
+
+                }
             }
-        } else if (drav >= 14750 && drav < 14950) {
-            gui.getDisplayMaintenance().setValue(15000 - drav);
 
-            if (drav % 10 == 0) {
-                gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
+        } else if (drav >= 5000 * change_stage - 250 && drav <= 5000 * change_stage) {
+            gui.getDisplayMaintenance().setValue(5000 * change_stage - drav);
 
-            }
-        } else if (drav >= 14950 && drav <= 15000) {
-            gui.getDisplayMaintenance().setValue(15000 - drav);
+            if (drav % 15 == 0) {
+                if (change_stage == 1) {
+                    gui.getScreen().setText("There is required maintenance ->  oil and oil filter change after : " + (5000 * change_stage - drav) + " miles");
 
-            if (drav % 5 == 0) {
-                gui.getScreen().setText("There is required maintenance ->    major service change : " + (15000 - drav));
+                } else if (change_stage == 2) {
+                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
 
+                } else if (change_stage == 3) {
+                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
+
+                }
             }
         } else {
-            if (drav > 5000 && drav < 10000) {
-                gui.getDisplayMaintenance().setValue(10000 - drav);
 
-            } else if (drav > 10000 && drav < 15000) {
-                gui.getDisplayMaintenance().setValue(15000 - drav);
+            if (drav > 0 && drav < 5000 * change_stage) {
+                gui.getDisplayMaintenance().setValue(5000 * change_stage - drav);
+                if (gui.getDisplayMaintenance().getValue() == 2000) {
+                    gui.getMaintenance_done_button().setVisible(true);
 
-            } else if (drav < 5000) {
-                gui.getDisplayMaintenance().setValue(5000 - drav);
+                }
 
-            } else if (drav == 5000 || drav == 10000 || drav == 15000) {
+            } else if (drav == 5000 * change_stage) {
                 gui.getScreen().setText("");
 
             }
@@ -480,7 +495,6 @@ public class AutoMobileManagmentSystem {
         return ((int) gui.getDisplayGear().getValue());
 
     }
-    
 
     public int getDrisaft_rot() {
         return ((int) gui.getDriveshaft_display().getValue());
@@ -510,10 +524,9 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setGear_pos(int gear_pos) {
-        
+
         if (gear_pos == 3) {
             gui.getLightBulb3().setOn(true);
-            
 
         } else {
             gui.getLightBulb3().setOn(false);
@@ -544,6 +557,18 @@ public class AutoMobileManagmentSystem {
 
     void add_rpm_number() {
         rpm_total += gui.getDisplayRPM().getValue();
+
+    }
+
+    public void accelearate_cruise_value(int gl) {
+        if (state_engine == true && cruise_state == true &&gear_pos==3) {
+            if (gl <= 100) {
+                this.cruise_value = gl;
+
+            } else {
+
+            }
+        }
 
     }
 }

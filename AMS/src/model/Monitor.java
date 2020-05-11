@@ -3,27 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Omar Shan
  */
-public class Monitor {
+public class Monitor extends Thread {
+
     private float avg_speed;
     private String maintenance;
     private float fuel_consumption;
     private int miles_driven;
     private Calibrator speed;
     private int trip;
+    AutoMobileManagmentSystem ams;
 
-    public Monitor() {
+    public Monitor(AutoMobileManagmentSystem ams) {
         this.avg_speed = 0f;
         this.maintenance = "";
         this.fuel_consumption = 0f;
         this.miles_driven = 0;
         this.trip = 0;
+        this.ams = ams;
     }
 
     public float getAvg_speed() {
@@ -73,6 +78,22 @@ public class Monitor {
     public void setTrip(int trip) {
         this.trip = trip;
     }
-    
-    
+
+    @Override
+    public void run() {
+
+        while (true) {
+
+            try {
+                this.sleep(1000);
+
+                //if active or deactive or resume
+                //  Deactivate_Cruise_control();
+                // Res_Cruise_control();
+            } catch (InterruptedException ex) {
+
+            }
+
+        }
+    }
 }

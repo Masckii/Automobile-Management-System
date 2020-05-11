@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import model.AutoMobileManagmentSystem;
 
@@ -47,10 +48,8 @@ public class View_AMS extends javax.swing.JFrame {
 
     public View_AMS() {
         initComponents();
-        
+
     }
-
-
 
     public DisplayCircular getDriveshaft_display() {
         return driveshaft_display;
@@ -59,7 +58,6 @@ public class View_AMS extends javax.swing.JFrame {
     public JLabel getCruise_label() {
         return cruise_label;
     }
-
 
     public void setDriveshaft_display(DisplayCircular driveshaft_display) {
         this.driveshaft_display = driveshaft_display;
@@ -254,6 +252,8 @@ public class View_AMS extends javax.swing.JFrame {
         crusing_lightBulb1 = new eu.hansolo.lightbulb.LightBulb();
         Maintenance_done_button = new javax.swing.JButton();
         cruise_label = new javax.swing.JLabel();
+        Increase_cruise = new javax.swing.JButton();
+        Decrease_cruise = new javax.swing.JButton();
         radialFuel = new eu.hansolo.steelseries.gauges.Radial1Lcd();
         radialRPM = new eu.hansolo.steelseries.gauges.Radial4();
         displayCrusingSpeed = new eu.hansolo.steelseries.gauges.DisplaySingle();
@@ -274,6 +274,8 @@ public class View_AMS extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Tripbulb = new eu.hansolo.lightbulb.LightBulb();
         displaytrip = new eu.hansolo.steelseries.gauges.DisplaySingle();
+        speed_time = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Automobile Management System");
@@ -377,10 +379,33 @@ public class View_AMS extends javax.swing.JFrame {
         });
 
         Maintenance_done_button.setText("Maintenance done");
+        Maintenance_done_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Maintenance_done_buttonActionPerformed(evt);
+            }
+        });
 
         cruise_label.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
         cruise_label.setForeground(new java.awt.Color(153, 153, 153));
         cruise_label.setText("Activate");
+
+        Increase_cruise.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Increase_cruise.setForeground(new java.awt.Color(102, 102, 102));
+        Increase_cruise.setText("+");
+        Increase_cruise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Increase_cruiseActionPerformed(evt);
+            }
+        });
+
+        Decrease_cruise.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Decrease_cruise.setForeground(new java.awt.Color(51, 51, 51));
+        Decrease_cruise.setText("-");
+        Decrease_cruise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Decrease_cruiseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -407,7 +432,11 @@ public class View_AMS extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(100, 100, 100)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(Increase_cruise, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Decrease_cruise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addComponent(buttonStartCruise)
                                             .addComponent(buttonStopCruise, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -468,7 +497,7 @@ public class View_AMS extends javax.swing.JFrame {
                         .addComponent(Maintenance_done_button)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lightBulb1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,6 +513,10 @@ public class View_AMS extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(buttonStopCruise))
                                     .addComponent(crusing_lightBulb1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Increase_cruise)
+                                    .addComponent(Decrease_cruise))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -590,6 +623,15 @@ public class View_AMS extends javax.swing.JFrame {
 
         jLabel3.setText("Drive shaft");
 
+        speed_time.setText("1");
+        speed_time.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                speed_timeActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Drive shaft X");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -656,11 +698,20 @@ public class View_AMS extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(63, 63, 63))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(speed_time, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(speed_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(radialRPM, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
@@ -851,6 +902,32 @@ public class View_AMS extends javax.swing.JFrame {
 
     }//GEN-LAST:event_butonStopTripActionPerformed
 
+    private void speed_timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speed_timeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_speed_timeActionPerformed
+
+    private void Maintenance_done_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Maintenance_done_buttonActionPerformed
+        // TODO add your handling code here:
+        Config.sendEvent(new events.Mintainace_done(true));
+
+    }//GEN-LAST:event_Maintenance_done_buttonActionPerformed
+
+    private void Increase_cruiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Increase_cruiseActionPerformed
+        // TODO add your handling code here:
+        Config.sendEvent(new events.Accelerate_cruise((int) (displayCrusingSpeed.getValue() + 1)));
+
+    }//GEN-LAST:event_Increase_cruiseActionPerformed
+
+    private void Decrease_cruiseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrease_cruiseActionPerformed
+        // TODO add your handling code here:
+        Config.sendEvent(new events.Accelerate_cruise((int) (displayCrusingSpeed.getValue() - 1)));
+
+    }//GEN-LAST:event_Decrease_cruiseActionPerformed
+
+    public JTextField getSpeed_time() {
+        return speed_time;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -861,7 +938,6 @@ public class View_AMS extends javax.swing.JFrame {
     public void setTripbulb(LightBulb Tripbulb) {
         this.Tripbulb = Tripbulb;
     }
-
 
     public LightBulb getCrusing_lightBulb1() {
         return crusing_lightBulb1;
@@ -880,6 +956,8 @@ public class View_AMS extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Decrease_cruise;
+    private javax.swing.JButton Increase_cruise;
     private javax.swing.JButton Maintenance_done_button;
     private eu.hansolo.lightbulb.LightBulb Tripbulb;
     private javax.swing.JButton butonStopTrip;
@@ -908,6 +986,7 @@ public class View_AMS extends javax.swing.JFrame {
     private eu.hansolo.steelseries.gauges.DisplayCircular driveshaft_display;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -928,5 +1007,6 @@ public class View_AMS extends javax.swing.JFrame {
     private eu.hansolo.steelseries.gauges.Radial2Lcd radialSpeedometer;
     private javax.swing.JTextArea screen;
     private javax.swing.JSlider sliderFuel;
+    private javax.swing.JTextField speed_time;
     // End of variables declaration//GEN-END:variables
 }
