@@ -35,6 +35,7 @@ import java.util.logging.Logger;
                Logger.getLogger(model.Calibrator.class.getName()).log(Level.SEVERE, null, ex);
             }
                 ams.set_average_fuel_distance();
+                ams.decrease_fuel();
               //System.out.println("speed : "+ams.get_speedOmeter());
                 Config.sendEvent(new events.Fuel_Reading( ams.get_fuel_reaging()));
         }

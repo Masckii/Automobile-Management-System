@@ -239,7 +239,7 @@ public class AutoMobileManagmentSystem {
             }
             // cc.setPriority(7);
 
-            gui.getDisplayCrusingSpeed().setValue(cruise_speed );
+            gui.getDisplayCrusingSpeed().setValue(cruise_speed);
 
             this.current_speed = cruise_speed;
 
@@ -301,14 +301,14 @@ public class AutoMobileManagmentSystem {
     }
 
     float generates_drive_shaft() {
-        if (state_engine == true ) {
-            
-                if (current_speed > 0 && current_speed <= 100) {
-                    float dss_gen =  (float) ((current_speed*0.05 ) * (5.0 / 6.0) * 60 * 2 + random(1, 2));
+        if (state_engine == true) {
 
-                    return dss_gen;
+            if (current_speed > 0 && current_speed <= 100) {
+                float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 + random(1, 2));
 
-                }
+                return dss_gen;
+
+            }
 
         }
 
@@ -320,11 +320,10 @@ public class AutoMobileManagmentSystem {
             // distance += current_speed * time_counter_sec / 100;
             float temp = 0;
 
-            distance += generates_drive_shaft()/1000;
+            distance += generates_drive_shaft() / 1000;
             setDreive_shaft_rotation(generates_drive_shaft());
 
             set_mentainace_notify((int) distance);
-            decrease_fuel((int) distance, fuel_reading);
             float dradial = distance / 165; //13*(10+20) led light
             gui.getDigitalRadial1().setValue(dradial);
 
@@ -344,11 +343,11 @@ public class AutoMobileManagmentSystem {
         }
 
     }
-    void set_average_fuel_distance()
-    {
-        if (state_engine==true&&fuel_reading>0&&distance>0) {
-            
-            gui.getDisplayAvgFuel().setValueAnimated(((rpm_total/time_counter_sec)/10)+2);
+
+    void set_average_fuel_distance() {
+        if (state_engine == true && fuel_reading > 0 && distance > 0 && rpm_total > 0 && time_counter_sec > 0) {
+
+            gui.getDisplayAvgFuel().setValueAnimated(((rpm_total / time_counter_sec) / 10) + 2);
         }
     }
 
@@ -412,13 +411,20 @@ public class AutoMobileManagmentSystem {
         }
     }
 
-    public int decrease_fuel(int distance, int fuel_reading) {
+    public void decrease_fuel() {
 
-        if (distance % 1000 == 0) {
-            return fuel_reading--;
-        } else {
-            return fuel_reading;
+        try {
+            System.out.println("remmmmmmmmmmmm " + distance %  Integer.valueOf((int) gui.getDisplayAvgFuel().getValue()+""));
+
+            if (distance % 2 == 0) {
+                gui.getRadialFuel().setValue(--fuel_reading);
+
+                distance += distance + 1;
+            }
+        } catch (Exception e) {
+            System.out.println("model.AutoMobileManagmentSystem.decrease_fuel()" + e.getMessage());
         }
+
     }
 
     public void setFuel_reading(int fuel_reading) {
@@ -526,6 +532,6 @@ public class AutoMobileManagmentSystem {
 
     void add_rpm_number() {
         rpm_total += gui.getDisplayRPM().getValue();
-        
+
     }
 }
