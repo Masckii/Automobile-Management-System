@@ -218,14 +218,24 @@ public class AutoMobileManagmentSystem {
     }
 
     public void get_cruise_update() {
-        if (cruise_state == true && gear_pos == 3) {
+        if (cruise_state == true && gear_pos == 3 && current_speed != cruise_value) {
+            cc.setState(CruiseControllerState.RESUME);
+            cc.setInit_value(cruise_value);
+            cc.setCruise_res_value(current_speed);
+            //---
+            cc.Res_Cruise_control(gui);
+
+        } else if (cruise_state == true && gear_pos == 3&& current_speed == cruise_value) {
             cc.setState(CruiseControllerState.ACTIVATE);
             cc.setInit_value(cruise_value);
             cc.setCruise_res_value(current_speed);
-
+            //--
+            cc.Activate_Cruise_control(gui);
         } else {
             cc.setState(CruiseControllerState.DEACTIVATE);
             cc.setCruise_con_value(current_speed);
+            //--
+            cc.Deactivate_Cruise_control(gui);
 
         }
 
@@ -470,6 +480,7 @@ public class AutoMobileManagmentSystem {
         return ((int) gui.getDisplayGear().getValue());
 
     }
+    
 
     public int getDrisaft_rot() {
         return ((int) gui.getDriveshaft_display().getValue());
@@ -499,8 +510,10 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setGear_pos(int gear_pos) {
+        
         if (gear_pos == 3) {
             gui.getLightBulb3().setOn(true);
+            
 
         } else {
             gui.getLightBulb3().setOn(false);

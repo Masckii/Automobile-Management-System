@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.View_AMS;
 
 /**
  *
@@ -41,25 +42,28 @@ public class CruiseController extends Thread {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void Activate_Cruise_control() {
+    public void Activate_Cruise_control(View_AMS gui) {
         if (state == CruiseControllerState.ACTIVATE) {
             System.out.println("CRRUISSS ACTIVATE init_value " + init_value);
+            gui.getCruise_label().setText("Activate");
             Config.sendEvent(new events.Cruise_con_Reading(init_value));
 
         }
     }
 
-    public Void Deactivate_Cruise_control() {
+    public Void Deactivate_Cruise_control(View_AMS gui) {
         if (state == CruiseControllerState.DEACTIVATE) {
+            gui.getCruise_label().setText("Deactivate");
             Config.sendEvent(new events.Cruise_con_Reading(cruise_res_value));
 
         }
         return null;
     }
 
-    public Void Res_Cruise_control() {
+    public Void Res_Cruise_control(View_AMS gui) {
         if (state == CruiseControllerState.RESUME) {
-            Config.sendEvent(new events.Cruise_con_Reading(cruise_res_value));
+            gui.getCruise_label().setText("RESUME");
+            Config.sendEvent(new events.Cruise_con_Reading(init_value));
 
         }
         return null;
@@ -97,10 +101,9 @@ public class CruiseController extends Thread {
             try {
 
                 ams.get_cruise_update();
-                this.sleep(900);
+                this.sleep(1000);
 
                 //if active or deactive or resume
-                Activate_Cruise_control();
                 //  Deactivate_Cruise_control();
                 // Res_Cruise_control();
             } catch (InterruptedException ex) {
