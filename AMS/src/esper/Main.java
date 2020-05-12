@@ -137,7 +137,7 @@ public class Main {
         Config.createStatement("select state from PerformEvent")
                 .setSubscriber(new Object() {
                     public void update(boolean gl) throws InterruptedException {
-                        ams.PerformAcceleration(gl);
+                        ams.Calibirator(gl);
                         //  System.err.println("in fuel");
                     }
                 });

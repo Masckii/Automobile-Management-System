@@ -129,7 +129,7 @@ public class AutoMobileManagmentSystem {
         this.fuel_reading = f;
     }
 
-    public void PerformAcceleration(boolean state) {
+    public void Calibirator(boolean state) {
 
         if (state == true && state_engine == true) {
             //Config.sendEvent(new events.Gear_Reading(getGear_pos()));
@@ -177,9 +177,11 @@ public class AutoMobileManagmentSystem {
                 if (speedo < (gear_pos * 33)) {
                     if (actoutor_state == 2) {
                         speedo = speedo + 4;
+                        gui.getThrotel_display().setValue(0.8);
                     }else{
                     if (actoutor_state == 3) {
                         speedo = speedo + 6;
+                         gui.getThrotel_display().setValue(1.2);
                     } else {
                         speedo = speedo + 5;
                     }
