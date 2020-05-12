@@ -339,6 +339,18 @@ public class AutoMobileManagmentSystem {
         return maintainance_state;
     }
 
+    public boolean isCruise_state() {
+        return cruise_state;
+    }
+
+    public static int getAc_value() {
+        return ac_value;
+    }
+
+    public double getRpm() {
+        return rpm;
+    }
+
     public void setMaintainance_state(boolean maintainance_state) {
         this.maintainance_state = maintainance_state;
         change_stage++;
@@ -415,39 +427,15 @@ public class AutoMobileManagmentSystem {
         return r.nextInt((max - min) + 1) + min;
     }
 
-    float generates_drive_shaft() {
-        if (state_engine == true) {
-            if (current_speed > 0 && current_speed <= 100) {
-                try {
-                    int speed_time = Integer.valueOf(gui.getSpeed_time().getText());
-                    if (current_speed != 0) {
-                        float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 0.7 * speed_time + random(1, 3));
-                        return dss_gen;
 
-                    } else {
-                        return 0;
-
-                    }
-                } catch (Exception e) {
-
-                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 0.7 + random(1, 3));
-                    return dss_gen;
-                }
-
-            }
-
-        }
-
-        return 0;
-    }
 
     void set_distance_driven() {
         if (state_engine && current_speed > 0) {
             // distance += current_speed * time_counter_sec / 100;
             float temp = 0;
 
-            distance += generates_drive_shaft() / 1000;
-            setDreive_shaft_rotation(generates_drive_shaft());
+            distance += dss.generates_drive_shaft(current_speed, state_engine) / 1000;
+            setDreive_shaft_rotation(dss.generates_drive_shaft(current_speed, state_engine));
 
             set_mentainace_notify((int) distance);
             float dradial = distance / 165; //13*(10+20) led light
@@ -530,13 +518,15 @@ public class AutoMobileManagmentSystem {
     public void decrease_fuel() {
 
         try {
-            if (state_engine == true && current_speed > 0) {
-                int x = (100 - (int) gui.getDisplayAvgFuel().getValue() * 10);
+            if (state_engine == true && current_speed > 0&&distance>50) {
+                
+                int x = (1000 - (int) gui.getDisplayAvgFuel().getValue() * 100);
                 int distance_1 = (int) distance;
+                System.out.println(distance_1+"model.AutoMobileManagmentSystem.decrease_fuel() "+x);
                 int mod = ((distance_1) % x);
 
                 if (mod == 0) {
-                    gui.getRadialFuel().setValue(fuel_reading - 0.1);
+                    gui.getRadialFuel().setValue(fuel_reading - 1);
 
                     distance = distance + 1;
                 }
@@ -679,4 +669,189 @@ public class AutoMobileManagmentSystem {
         }
 
     }
+
+    public boolean isState_engine() {
+        return state_engine;
+    }
+
+    public void setState_engine(boolean state_engine) {
+        this.state_engine = state_engine;
+    }
+
+    public int getCurrent_speed() {
+        return current_speed;
+    }
+
+    public void setCurrent_speed(int current_speed) {
+        this.current_speed = current_speed;
+    }
+
+    public float getFuel_reading() {
+        return fuel_reading;
+    }
+
+    public void setFuel_reading(float fuel_reading) {
+        this.fuel_reading = fuel_reading;
+    }
+
+    public static int getTime_counter_sec() {
+        return time_counter_sec;
+    }
+
+    public static void setTime_counter_sec(int time_counter_sec) {
+        AutoMobileManagmentSystem.time_counter_sec = time_counter_sec;
+    }
+
+    public static int getTime_counter_trip() {
+        return time_counter_trip;
+    }
+
+    public static void setTime_counter_trip(int time_counter_trip) {
+        AutoMobileManagmentSystem.time_counter_trip = time_counter_trip;
+    }
+
+    public static int getSpeed_counter_trip() {
+        return speed_counter_trip;
+    }
+
+    public static void setSpeed_counter_trip(int speed_counter_trip) {
+        AutoMobileManagmentSystem.speed_counter_trip = speed_counter_trip;
+    }
+
+    public static int getAverage_speed() {
+        return average_speed;
+    }
+
+    public static void setAverage_speed(int average_speed) {
+        AutoMobileManagmentSystem.average_speed = average_speed;
+    }
+
+    public static int getRpm_total() {
+        return rpm_total;
+    }
+
+    public static void setRpm_total(int rpm_total) {
+        AutoMobileManagmentSystem.rpm_total = rpm_total;
+    }
+
+    public static float getDistance() {
+        return distance;
+    }
+
+    public static void setDistance(float distance) {
+        AutoMobileManagmentSystem.distance = distance;
+    }
+
+    public static int getCruise_value() {
+        return cruise_value;
+    }
+
+    public static void setCruise_value(int cruise_value) {
+        AutoMobileManagmentSystem.cruise_value = cruise_value;
+    }
+
+    public static int getChange_stage() {
+        return change_stage;
+    }
+
+    public static void setChange_stage(int change_stage) {
+        AutoMobileManagmentSystem.change_stage = change_stage;
+    }
+
+    public CruiseController getCc() {
+        return cc;
+    }
+
+    public void setCc(CruiseController cc) {
+        this.cc = cc;
+    }
+
+    public Monitor getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(Monitor monitor) {
+        this.monitor = monitor;
+    }
+
+    public DriveShaftSensor getDss() {
+        return dss;
+    }
+
+    public void setDss(DriveShaftSensor dss) {
+        this.dss = dss;
+    }
+
+    public Gear_sensor getGrs() {
+        return grs;
+    }
+
+    public void setGrs(Gear_sensor grs) {
+        this.grs = grs;
+    }
+
+    public Calibrator getCal() {
+        return cal;
+    }
+
+    public void setCal(Calibrator cal) {
+        this.cal = cal;
+    }
+
+    public Fuel_Sensor getFs() {
+        return fs;
+    }
+
+    public void setFs(Fuel_Sensor fs) {
+        this.fs = fs;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public Monitor getMon() {
+        return mon;
+    }
+
+    public void setMon(Monitor mon) {
+        this.mon = mon;
+    }
+
+    public ServiceCompletion getSer_com() {
+        return ser_com;
+    }
+
+    public void setSer_com(ServiceCompletion ser_com) {
+        this.ser_com = ser_com;
+    }
+
+    public SystemStateTracer getSst() {
+        return sst;
+    }
+
+    public void setSst(SystemStateTracer sst) {
+        this.sst = sst;
+    }
+
+    public View_AMS getGui() {
+        return gui;
+    }
+
+    public void setGui(View_AMS gui) {
+        this.gui = gui;
+    }
+
+    public double[] getCruise_controll_values() {
+        return cruise_controll_values;
+    }
+
+    public void setCruise_controll_values(double[] cruise_controll_values) {
+        this.cruise_controll_values = cruise_controll_values;
+    }
+    
 }
