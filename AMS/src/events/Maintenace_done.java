@@ -9,11 +9,11 @@ package events;
  *
  * @author sam
  */
-public class Mintainace_done {
+public class Maintenace_done {
     
         private boolean state;
 
-    public Mintainace_done(boolean state) {
+    public Maintenace_done(boolean state) {
         this.state = state;
     }
 
