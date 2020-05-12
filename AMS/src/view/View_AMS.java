@@ -491,6 +491,7 @@ public class View_AMS extends javax.swing.JFrame {
         volt_dislpay.setUnitString("VLT");
         volt_dislpay.setVerifyInputWhenFocusTarget(false);
 
+        sliderFuel2.setBackground(new java.awt.Color(51, 51, 51));
         sliderFuel2.setMaximum(10);
         sliderFuel2.setValue(0);
 
