@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package events;
 
 /**
  *
- * @author moamen
+ * @author sam
  */
-public class set_ac_value {
-    private int value;
+public class Actuator_reading {
+    int state ;
 
-    public set_ac_value(int value) {
-        this.value = value;
+    public Actuator_reading(int state) {
+        this.state = state;
     }
 
-    public int getValue() {
-        return value;
+    public int getState() {
+        return state;
     }
     
 }

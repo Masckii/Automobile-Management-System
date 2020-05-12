@@ -39,6 +39,7 @@ public class AutoMobileManagmentSystem {
     private double rpm;
     private static float volt = 1;
     private static float temp_volt = 1;
+    private static int actoutor_state = 1;
     //-- compunents of our AMS 
     private CruiseController cc;
     private Monitor monitor;
@@ -123,8 +124,9 @@ public class AutoMobileManagmentSystem {
         this.accelerate = accelerate;
     }
 
-    public static void setAc_value(int ac_value) {
-        AutoMobileManagmentSystem.ac_value = ac_value;
+    public void setFuel_value(int f) {
+        gui.getRadialFuel().setValueAnimated(f);
+        this.fuel_reading = f;
     }
 
     public void PerformAcceleration(boolean state) {
@@ -248,18 +250,39 @@ public class AutoMobileManagmentSystem {
             gui.speed = speedo;
             volt = (float) (rpm / 10);
 
+            gui.getVolt_dislpay_actual().setValue(volt);
             gui.getVolt_dislpay().setValueAnimated(volt - temp_volt);
-            if (volt - temp_volt>0) {
-            gui.getVolt_dislpay().setUnitString(" + Vlt");
+            if (volt - temp_volt > 0) {
+                gui.getVolt_dislpay().setUnitString(" + Vlt");
 
-            }
-            else
-            {
-            gui.getVolt_dislpay().setUnitString(" - Vlt");
+            } else {
+                gui.getVolt_dislpay().setUnitString("  - Vlt");
 
             }
             temp_volt = (float) (rpm / 10);
             // return cruise_controll_values;
+        }
+    }
+
+    void decreas_rpm_value() {
+        if (rpm > 0) {
+            rpm = rpm - 1;
+            gui.getRadialRPM().setValueAnimated(rpm);
+            if (gui.getVolt_dislpay_actual().getValue() < 1) {
+                gui.getVolt_dislpay_actual().setValueAnimated(0);
+
+            } else {
+                if (rpm < 11) {
+                    gui.getRadialRPM().setValueAnimated(10);
+                    gui.getDisplayRPM().setValueAnimated(10);
+                } else {
+                    gui.getVolt_dislpay_actual().setValueAnimated(Math.abs(rpm / 10));
+                    gui.getDisplayRPM().setValueAnimated(rpm);
+
+                }
+
+            }
+            gui.getVolt_dislpay().setValueAnimated(0);
         }
     }
 
@@ -271,54 +294,32 @@ public class AutoMobileManagmentSystem {
             if (state_engine == true && current_speed > 0) {
                 if (current_speed > 20 && current_speed <= 40) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                    /*rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
-                    if(rpm<0){
-                        rpm=0;
-                    }
-                    System.out.println("000000000000000000000000000"+rpm);
-                     gui.getRadialRPM().setValueAnimated(rpm);
-                    gui.getDisplayRPM().setValueAnimated(rpm);*/
+
+                    decreas_rpm_value();
+
                     if (current_speed == 36 && gear_pos > 1) {
-                        //  gui.getDisplayGear().setValue(1);
+                        gui.getDisplayGear().setValue(1);
                     }
-                    // gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.01);
                 } else if (current_speed > 40 && current_speed <= 60) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                    /* rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
-                    if(rpm<0){
-                        rpm=0;
-                    }
-                    gui.getRadialRPM().setValueAnimated(rpm);
-                    gui.getDisplayRPM().setValueAnimated(rpm);*/
-                    //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.02);
+                    decreas_rpm_value();
                 } else if (current_speed > 60 && current_speed <= 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                    /*rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
-                    if(rpm<0){
-                        rpm=0;
-                    }
-                    gui.getRadialRPM().setValueAnimated(rpm);
-                    gui.getDisplayRPM().setValueAnimated(rpm);*/
+                    decreas_rpm_value();
+
                     if (current_speed == 66 && gear_pos > 2) {
-                        // gui.getDisplayGear().setValue(2);
+                        gui.getDisplayGear().setValue(2);
                     }
 
                 } else if (current_speed > 80 && current_speed <= 100) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-                    /* rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
-                    System.out.println(rpm);
-                    if(rpm<0){
-                        rpm=0;
-                    }
-                    gui.getRadialRPM().setValueAnimated(rpm);
-                    gui.getDisplayRPM().setValueAnimated(rpm);*/
-                    //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
+                    decreas_rpm_value();
+
                 }
             } else {
                 gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
-                /* rpm = (((current_speed - current_speed * 0.02) - ((gear_pos - 1) * 33)) * (70 / 33));
-                gui.getRadialRPM().setValueAnimated(rpm);
-                gui.getDisplayRPM().setValueAnimated(rpm);*/
+                decreas_rpm_value();
+
             }
         } catch (Exception e) {
         }
@@ -554,6 +555,7 @@ public class AutoMobileManagmentSystem {
             this.state_engine = false;
 
         } else {
+
             this.fuel_reading = fuel_reading;
 
         }
@@ -612,10 +614,9 @@ public class AutoMobileManagmentSystem {
     }
 
     public void setTrip_state(boolean trip_state) {
-        for (int i = 0; i < 3; i++) {
-            gui.getTripbulb().setOn(trip_state);
 
-        }
+        gui.getTripbulb().setOn(trip_state);
+
         time_counter_trip = 0;
         speed_counter_trip = 0;
         this.trip_state = trip_state;
@@ -626,10 +627,14 @@ public class AutoMobileManagmentSystem {
         if (gear_pos == 1) {
             gui.getGear_label().setText("LOW_GEAR");
         } else if (gear_pos == 2) {
+            gui.GearState = gear_pos;
+            gui.getDisplayGear().setValue(gear_pos);
             gui.getGear_label().setText("MID_GEAR");
 
         } else if (gear_pos == 3) {
             gui.getGear_label().setText("TOP_GEAR");
+            gui.GearState = gear_pos;
+            gui.getDisplayGear().setValue(gear_pos);
 
         } else if (gear_pos == 0) {
             gui.getGear_label().setText("Clutch");
@@ -864,6 +869,26 @@ public class AutoMobileManagmentSystem {
 
     public void setCruise_controll_values(double[] cruise_controll_values) {
         this.cruise_controll_values = cruise_controll_values;
+    }
+    public void auto_increass_speed()
+    {
+        
+    }
+    
+
+    public void setactoutor_state(int state) {
+        if (state_engine == true) {
+            actoutor_state = state;
+            if (state == 2 || state == 3) {
+                gui.getActo_bulb().setOn(true);
+                gui.getActuator_label().setText("Actuator ON");
+            } else {
+                gui.getActo_bulb().setOn(false);
+                gui.getActuator_label().setText("Actuator OFF");
+
+            }
+        }
+
     }
 
 }

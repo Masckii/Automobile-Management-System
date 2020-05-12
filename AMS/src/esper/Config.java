@@ -10,6 +10,7 @@ import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import events.AccelerateEvent;
 import events.Accelerate_cruise;
+import events.Actuator_reading;
 import events.BrakeEvent;
 import events.Calibirator_state_reading;
 import events.CalibratorSensorReading;
@@ -23,10 +24,9 @@ import events.RpmEvent;
 import events.SpeedOMeterReading;
 import events.TransmissionGearEvent;
 import events.TripEvent;
-import events.set_ac_value;
+import events.set_Fuel;
 
 // Add all events classes
-
 /**
  *
  * @author Omar
@@ -49,14 +49,14 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(BrakeEvent.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);//Accelerate_cruise
+        engine.getEPAdministrator().getConfiguration().addEventType(AccelerateEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Mintainace_done.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Accelerate_cruise.class);
-       
         engine.getEPAdministrator().getConfiguration().addEventType(RpmEvent.class);
-         engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);
-          engine.getEPAdministrator().getConfiguration().addEventType(set_ac_value.class);
-         
+        engine.getEPAdministrator().getConfiguration().addEventType(Actuator_reading.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);
+        engine.getEPAdministrator().getConfiguration().addEventType(set_Fuel.class);
+
         System.out.println("Events Successfully Registered.");
     }
 

@@ -84,16 +84,15 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-  
-        
-                Config.createStatement("select value from Cruise_con_Reading")
+
+        Config.createStatement("select value from Cruise_con_Reading")
                 .setSubscriber(new Object() {
                     public void update(int gl) throws InterruptedException {
-                         ams.set_cruise_readig_handle(gl);
+                        ams.set_cruise_readig_handle(gl);
                         //  System.err.println("in fuel");
                     }
                 });
-                 Config.createStatement("select state from BrakeEvent")
+        Config.createStatement("select state from BrakeEvent")
                 .setSubscriber(new Object() {
                     public void update(boolean gl) throws InterruptedException {
                         ams.setAccelerate(gl);
@@ -121,10 +120,10 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-                Config.createStatement("select cruise_value from Accelerate_cruise")
+        Config.createStatement("select cruise_value from Accelerate_cruise")
                 .setSubscriber(new Object() {
                     public void update(int gl) throws InterruptedException {
-                          ams.accelearate_cruise_value(gl);
+                        ams.accelearate_cruise_value(gl);
                         //  System.err.println("in fuel");
                     }
                 });
@@ -142,21 +141,28 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-                Config.createStatement("select state from Mintainace_done")
+        Config.createStatement("select state from Mintainace_done")
                 .setSubscriber(new Object() {
-                    public void update(boolean gl) throws InterruptedException {
-                         ams.setMaintainance_state(gl);
+                    public void update(boolean gl) throws InterruptedException {//Actuator_reading
+                        ams.setMaintainance_state(gl);
                         //  System.err.println("in fuel");
                     }
                 });
-                 Config.createStatement("select value from set_ac_value")
+        Config.createStatement("select value from set_Fuel")
                 .setSubscriber(new Object() {
                     public void update(int gl) throws InterruptedException {
-                         ams.setAc_value(gl);
+                        ams.setFuel_value(gl);
                         //  System.err.println("in fuel");
                     }
                 });
 
+        Config.createStatement("select state from Actuator_reading")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                        ams.setactoutor_state(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")
 //                .setSubscriber(new Object() {
