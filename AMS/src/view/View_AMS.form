@@ -239,7 +239,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="sliderFuel1" min="-2" pref="37" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="displaySingle1" min="-2" pref="91" max="-2" attributes="0"/>
+                                          <Component id="volt_dislpay" min="-2" pref="91" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -410,7 +410,7 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="displaySingle1" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="volt_dislpay" min="-2" pref="25" max="-2" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <Component id="buttonAccelerate" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -456,7 +456,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="73" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -712,7 +712,7 @@
             <Property name="useNullLayout" type="boolean" value="true"/>
           </Layout>
         </Container>
-        <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displaySingle1">
+        <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="volt_dislpay">
           <Properties>
             <Property name="debugGraphicsOptions" type="int" value="-1"/>
             <Property name="lcdColor" type="eu.hansolo.steelseries.tools.LcdColor" editor="org.netbeans.modules.form.editors.EnumEditor">

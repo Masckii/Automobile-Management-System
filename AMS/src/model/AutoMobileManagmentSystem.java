@@ -37,6 +37,8 @@ public class AutoMobileManagmentSystem {
     private static int change_stage;
     private static int ac_value;
     private double rpm;
+    private static float volt = 1;
+    private static float temp_volt = 1;
     //-- compunents of our AMS 
     private CruiseController cc;
     private Monitor monitor;
@@ -135,7 +137,7 @@ public class AutoMobileManagmentSystem {
             int g;
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-               /* g = (gear_pos - 1) * 33;
+                /* g = (gear_pos - 1) * 33;
 
                 rpm = rpm + ac_value * 10;
                 p = ac_value * 10;
@@ -172,21 +174,21 @@ public class AutoMobileManagmentSystem {
 
                 if (speedo < (gear_pos * 33)) {
 
-                 speedo = speedo + 5;
+                    speedo = speedo + 5;
 
-                 rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                 if (rpm < 5) {
-                 rpm = 5;
-                 }
+                    rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                    if (rpm < 5) {
+                        rpm = 5;
+                    }
 
-                 }
-                 if (speedo > 99) {
-                 speedo = 99;
-                 }
+                }
+                if (speedo > 99) {
+                    speedo = 99;
+                }
             } else {
                 //int rr=(int)gui.getRadialSpeedometer().getValue();
 
-               /* rpm = rpm - ac_value * 10;
+                /* rpm = rpm - ac_value * 10;
                 p = ac_value * 10;
                 if (rpm < 0) {
                     rpm = 0;
@@ -208,33 +210,32 @@ public class AutoMobileManagmentSystem {
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }*/
+                speedo = speedo - 5;
+                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                if (rpm < 5) {
+                    rpm = 5;
+                }
 
-                 speedo = speedo - 5;
-                 rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                 if (rpm < 5) {
-                 rpm = 5;
-                 }
+                if (speedo < 0) {
+                    speedo = 0;
+                }
+                if (speedo > 0 && speedo < 33) {
+                    if (gear_pos == 2) {
+                        gear_pos--;
+                    }
+                }
+                if (speedo > 34 && speedo < 66) {
+                    if (gear_pos == 3) {
+                        gear_pos--;
+                    }
+                }
+                if (gear_pos < 1) {
+                    gear_pos = 1;
+                }
+                if (speedo < 0) {
+                    speedo = 0;
+                }
 
-                 if (speedo < 0) {
-                 speedo = 0;
-                 }
-                 if (speedo > 0 && speedo < 33) {
-                 if (gear_pos == 2) {
-                 gear_pos--;
-                 }
-                 }
-                 if (speedo > 34 && speedo < 66) {
-                 if (gear_pos == 3) {
-                 gear_pos--;
-                 }
-                 }
-                 if (gear_pos < 1) {
-                 gear_pos = 1;
-                 }
-                 if (speedo < 0) {
-                 speedo = 0;
-                 }
-                 
             }
             System.out.println(speedo);
             gui.getRadialSpeedometer().setValueAnimated(speedo);
@@ -245,6 +246,19 @@ public class AutoMobileManagmentSystem {
             gui.GearState = gear_pos;
             gui.RPM = rpm;
             gui.speed = speedo;
+            volt = (float) (rpm / 10);
+
+            gui.getVolt_dislpay().setValueAnimated(volt - temp_volt);
+            if (volt - temp_volt>0) {
+            gui.getVolt_dislpay().setUnitString(" + Vlt");
+
+            }
+            else
+            {
+            gui.getVolt_dislpay().setUnitString(" - Vlt");
+
+            }
+            temp_volt = (float) (rpm / 10);
             // return cruise_controll_values;
         }
     }
@@ -427,8 +441,6 @@ public class AutoMobileManagmentSystem {
         return r.nextInt((max - min) + 1) + min;
     }
 
-
-
     void set_distance_driven() {
         if (state_engine && current_speed > 0) {
             // distance += current_speed * time_counter_sec / 100;
@@ -518,11 +530,11 @@ public class AutoMobileManagmentSystem {
     public void decrease_fuel() {
 
         try {
-            if (state_engine == true && current_speed > 0&&distance>50) {
-                
+            if (state_engine == true && current_speed > 0 && distance > 50) {
+
                 int x = (1000 - (int) gui.getDisplayAvgFuel().getValue() * 100);
                 int distance_1 = (int) distance;
-                System.out.println(distance_1+"model.AutoMobileManagmentSystem.decrease_fuel() "+x);
+                System.out.println(distance_1 + "model.AutoMobileManagmentSystem.decrease_fuel() " + x);
                 int mod = ((distance_1) % x);
 
                 if (mod == 0) {
@@ -853,5 +865,5 @@ public class AutoMobileManagmentSystem {
     public void setCruise_controll_values(double[] cruise_controll_values) {
         this.cruise_controll_values = cruise_controll_values;
     }
-    
+
 }

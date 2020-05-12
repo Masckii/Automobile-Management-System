@@ -259,7 +259,7 @@ public class View_AMS extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lightBulb2 = new eu.hansolo.lightbulb.LightBulb();
-        displaySingle1 = new eu.hansolo.steelseries.gauges.DisplaySingle();
+        volt_dislpay = new eu.hansolo.steelseries.gauges.DisplaySingle();
         sliderFuel2 = new javax.swing.JSlider();
         radialFuel = new eu.hansolo.steelseries.gauges.Radial1Lcd();
         radialRPM = new eu.hansolo.steelseries.gauges.Radial4();
@@ -427,10 +427,10 @@ public class View_AMS extends javax.swing.JFrame {
 
         jButton3.setText("Down hill");
 
-        displaySingle1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        displaySingle1.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.GRAY_LCD);
-        displaySingle1.setUnitString("VLT");
-        displaySingle1.setValue(1.0);
+        volt_dislpay.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        volt_dislpay.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.GRAY_LCD);
+        volt_dislpay.setUnitString("VLT");
+        volt_dislpay.setValue(1.0);
 
         sliderFuel2.setMaximum(10);
         sliderFuel2.setValue(0);
@@ -462,7 +462,7 @@ public class View_AMS extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(sliderFuel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(displaySingle1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(volt_dislpay, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(141, 141, 141)
@@ -587,7 +587,7 @@ public class View_AMS extends javax.swing.JFrame {
                                             .addComponent(jLabel7)
                                             .addComponent(Gear_label)))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(displaySingle1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(volt_dislpay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(buttonAccelerate)
                                             .addGap(27, 27, 27)
@@ -617,7 +617,7 @@ public class View_AMS extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lightBulb2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3))))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         radialFuel.setMaxValue(10.0);
@@ -850,6 +850,10 @@ public class View_AMS extends javax.swing.JFrame {
         //else do nothing.
     }//GEN-LAST:event_buttonStopEngineActionPerformed
 
+    public DisplaySingle getVolt_dislpay() {
+        return volt_dislpay;
+    }
+
     private void buttonSetFuelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetFuelActionPerformed
         radialFuel.setValueAnimated(sliderFuel2.getValue());
 
@@ -1065,7 +1069,6 @@ public class View_AMS extends javax.swing.JFrame {
     private eu.hansolo.steelseries.gauges.DisplaySingle displayMaintenance;
     private eu.hansolo.steelseries.gauges.DisplaySingle displayMilesDriven;
     private eu.hansolo.steelseries.gauges.DisplaySingle displayRPM;
-    private eu.hansolo.steelseries.gauges.DisplaySingle displaySingle1;
     private eu.hansolo.steelseries.gauges.DisplaySingle displaytrip;
     private eu.hansolo.steelseries.gauges.DisplayCircular driveshaft_display;
     private javax.swing.JButton jButton1;
@@ -1097,5 +1100,6 @@ public class View_AMS extends javax.swing.JFrame {
     private javax.swing.JSlider sliderFuel1;
     private javax.swing.JSlider sliderFuel2;
     private javax.swing.JTextField speed_time;
+    private eu.hansolo.steelseries.gauges.DisplaySingle volt_dislpay;
     // End of variables declaration//GEN-END:variables
 }
