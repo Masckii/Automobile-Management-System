@@ -939,7 +939,7 @@ public class View_AMS extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBrakeActionPerformed
 
     private void buttonFirstGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFirstGearActionPerformed
-        pre_GearState=GearState;
+      
         GearState = 1;
     }//GEN-LAST:event_buttonFirstGearActionPerformed
 
@@ -958,20 +958,16 @@ public class View_AMS extends javax.swing.JFrame {
     }
 
     private void buttonSecondGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSecondGearActionPerformed
-      pre_GearState=GearState;
+      
         GearState = 2;
-        if(GearState>pre_GearState){
-            System.out.println("uiuiuiuiuiuiuiuiuiiuiuiui00000000000000000000000000000000000000000000000000000000000000000000000");
-             Config.sendEvent(new events.RpmEvent(0));
-        }
+        
     }//GEN-LAST:event_buttonSecondGearActionPerformed
 
     private void buttonThirdGearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThirdGearActionPerformed
-       pre_GearState=GearState;
+      
         GearState = 3;
-        if(GearState>pre_GearState){
-             Config.sendEvent(new events.RpmEvent(0));
-        }
+        
+        
     }//GEN-LAST:event_buttonThirdGearActionPerformed
 
     public JLabel getGear_label() {
