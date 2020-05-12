@@ -35,6 +35,7 @@ public class AutoMobileManagmentSystem {
     private boolean accelerate;
     private boolean maintainance_state;
     private static int change_stage;
+    private static int ac_value;
     private double rpm;
     //-- compunents of our AMS 
     private CruiseController cc;
@@ -73,6 +74,7 @@ public class AutoMobileManagmentSystem {
         dreive_shaft_rotation = 0;
         change_stage = 1;
         rpm = 0;
+        
         current_speed = 0;
         //
         //table
@@ -115,6 +117,10 @@ public class AutoMobileManagmentSystem {
         this.accelerate = accelerate;
     }
 
+    public static void setAc_value(int ac_value) {
+        AutoMobileManagmentSystem.ac_value = ac_value;
+    }
+
     public void PerformAcceleration(boolean state) {
 
         if (state == true && state_engine == true) {
@@ -123,7 +129,11 @@ public class AutoMobileManagmentSystem {
             int speedo = (int) gui.getRadialSpeedometer().getValue();
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-                if (speedo < (gear_pos * 33)) {
+                rpm=ac_value*10;
+               
+                speedo=speedo+  ((33/80)*(ac_value*10));
+                 
+                /*if (speedo < (gear_pos * 33)) {
 
                     speedo = speedo + 5;
 
@@ -135,11 +145,36 @@ public class AutoMobileManagmentSystem {
                 }
                 if (speedo > 99) {
                     speedo = 99;
-                }
+                }*/
 
             } else {
                 //int rr=(int)gui.getRadialSpeedometer().getValue();
-                speedo = speedo - 5;
+                 
+                if(rpm>0){
+                    rpm=ac_value*10;
+                    
+                }else{
+                    rpm=0;
+                }
+                 speedo=speedo-((33/80)*ac_value*10);
+                 if(speedo<0){
+                     speedo=0;
+                 }
+                 if (speedo > 0 && speedo < 33) {
+                    if (gear_pos == 2) {
+                        gear_pos--;
+                    }
+                }
+                if (speedo > 34 && speedo < 66) {
+                    if (gear_pos == 3) {
+                        gear_pos--;
+                    }
+                }
+                if (gear_pos < 1) {
+                    gear_pos = 1;
+                }
+                 
+               /* speedo = speedo - 5;
                 rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
                 if (rpm < 5) {
                     rpm = 5;
@@ -164,7 +199,7 @@ public class AutoMobileManagmentSystem {
                 if (speedo < 0) {
                     speedo = 0;
                 }
-
+*/
             }
             System.out.println(speedo);
             gui.getRadialSpeedometer().setValueAnimated(speedo);

@@ -10,19 +10,20 @@ import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 import events.AccelerateEvent;
 import events.Accelerate_cruise;
-import events.CalibratorSensorReading;
-import events.Cruise_con_Reading;
-import events.Fuel_Reading;
-import events.SpeedOMeterReading;
-import events.TransmissionGearEvent;
-import events.TripEvent;
 import events.BrakeEvent;
 import events.Calibirator_state_reading;
+import events.CalibratorSensorReading;
+import events.Cruise_con_Reading;
 import events.Cruise_state_reading;
 import events.Drive_shaft_reading;
+import events.Fuel_Reading;
 import events.Mintainace_done;
 import events.PerformEvent;
 import events.RpmEvent;
+import events.SpeedOMeterReading;
+import events.TransmissionGearEvent;
+import events.TripEvent;
+import events.set_ac_value;
 
 // Add all events classes
 
@@ -54,6 +55,8 @@ public class Config {
        
         engine.getEPAdministrator().getConfiguration().addEventType(RpmEvent.class);
          engine.getEPAdministrator().getConfiguration().addEventType(PerformEvent.class);
+          engine.getEPAdministrator().getConfiguration().addEventType(set_ac_value.class);
+         
         System.out.println("Events Successfully Registered.");
     }
 

@@ -149,6 +149,13 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
+                 Config.createStatement("select value from set_ac_value")
+                .setSubscriber(new Object() {
+                    public void update(int gl) throws InterruptedException {
+                         ams.setAc_value(gl);
+                        //  System.err.println("in fuel");
+                    }
+                });
 
 //        //PedalEvent
 //        Config.createStatement("select speed from PedalEvent")
