@@ -178,15 +178,15 @@ public class AutoMobileManagmentSystem {
                     if (actoutor_state == 2) {
                         speedo = speedo + 4;
                         gui.getThrotel_display().setValue(0.8);
-                    }else{
-                    if (actoutor_state == 3) {
-                        speedo = speedo + 6;
-                         gui.getThrotel_display().setValue(1.2);
                     } else {
-                        speedo = speedo + 5;
+                        if (actoutor_state == 3) {
+                            speedo = speedo + 6;
+                            gui.getThrotel_display().setValue(1.2);
+                        } else {
+                            speedo = speedo + 5;
+                        }
                     }
-                    }
-                    
+
                     rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
                     if (rpm < 5) {
                         rpm = 5;

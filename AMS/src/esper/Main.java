@@ -141,7 +141,7 @@ public class Main {
                         //  System.err.println("in fuel");
                     }
                 });
-        Config.createStatement("select state from Mintainace_done")
+        Config.createStatement("select state from Maintenace_done")
                 .setSubscriber(new Object() {
                     public void update(boolean gl) throws InterruptedException {//Actuator_reading
                         ams.setMaintainance_state(gl);

@@ -30,17 +30,16 @@ public class Calibrator extends Thread {
     @Override
     public void run() {
         while (true) {
-           
 
             try {
                 this.sleep(1000);
                 //ams.drop_speed_automatic();
                 ams.add_rpm_number();
             } catch (InterruptedException ex) {
-               Logger.getLogger(Calibrator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Calibrator.class.getName()).log(Level.SEVERE, null, ex);
             }
-              //System.out.println("speed : "+ams.get_speedOmeter());
-                Config.sendEvent(new SpeedOMeterReading(ams.get_speedOmeter()));
+            //System.out.println("speed : "+ams.get_speedOmeter());
+            Config.sendEvent(new SpeedOMeterReading(ams.get_speedOmeter()));
         }
     }
 

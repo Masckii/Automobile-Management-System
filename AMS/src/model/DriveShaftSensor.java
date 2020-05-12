@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author group  7
+ * @author group 7
  */
 public class DriveShaftSensor extends Thread {
 
@@ -22,8 +22,7 @@ public class DriveShaftSensor extends Thread {
     private int RPM;
     AutoMobileManagmentSystem ams;
 
-    
-        private int random(int min, int max) {
+    private int random(int min, int max) {
 
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -33,8 +32,7 @@ public class DriveShaftSensor extends Thread {
         return r.nextInt((max - min) + 1) + min;
     }
 
-    
-    float generates_drive_shaft(int current_speed ,boolean state_en) {
+    float generates_drive_shaft(int current_speed, boolean state_en) {
         if (state_en == true) {
             if (current_speed > 0 && current_speed <= 100) {
                 try {

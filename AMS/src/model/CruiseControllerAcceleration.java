@@ -11,8 +11,5 @@ package model;
  */
 public enum CruiseControllerAcceleration {
     START_ACCELERATE, STOP_ACCELERATE
-    
-    
-    
-    
+
 }
