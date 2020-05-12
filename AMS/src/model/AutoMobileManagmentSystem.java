@@ -74,7 +74,7 @@ public class AutoMobileManagmentSystem {
         dreive_shaft_rotation = 0;
         change_stage = 1;
         rpm = 0;
-        
+
         current_speed = 0;
         //
         //table
@@ -107,6 +107,10 @@ public class AutoMobileManagmentSystem {
 
     public void setRpm(double rpm) {
         this.rpm = rpm;
+        if(rpm==0){
+        gui.getRadialRPM().setValue(rpm);
+        gui.getDisplayRPM().setValue(rpm);
+        }
     }
 
     public boolean isAccelerate() {
@@ -127,64 +131,67 @@ public class AutoMobileManagmentSystem {
             //Config.sendEvent(new events.Gear_Reading(getGear_pos()));
 
             int speedo = (int) gui.getRadialSpeedometer().getValue();
+            double u = 0, p = 0;int g;
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-                if(rpm!=80){
-                rpm=rpm+ac_value*10;
-                if(rpm>80){
-                    rpm=80;
-                }
-                 System.out.println(((33.0/80.0)*(rpm)));
-                speedo = (int) (speedo +  ((33.0/80.0)*(rpm)));
-                 System.out.println(speedo);
-                }
+                g=(gear_pos-1)*33;
+
+                    rpm = rpm + ac_value * 10;
+                    p = ac_value * 10;
+                    if (rpm >= 80) {
+                        u = rpm - ac_value * 10;
+                        System.out.println(u);
+                        p = 80 - u;
+                        System.out.println(p);
+                        rpm = 80;
+                    }
+                    System.out.println((p));
+                    System.out.println(((33.0 / 80.0) * (p)));
+                    speedo = (int) (speedo + ((33.0 / 80.0) * (p)));
+                    if(gear_pos*33-speedo>33){
+                        rpm=0;
+                    }
+                    if(gear_pos==1){
+                        if(speedo>33){
+                            speedo=33;
+                        }
+                    }
+                     if(gear_pos==2){
+                        if(speedo>66){
+                            speedo=66;
+                        }
+                    }
+                      if(gear_pos==3){
+                        if(speedo>99){
+                            speedo=99;
+                        }
+                    }
+                    //speedo=speedo+g;
+                    System.out.println(speedo);
+                
                 /*if (speedo < (gear_pos * 33)) {
 
-                    speedo = speedo + 5;
+                 speedo = speedo + 5;
 
-                    rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                    if (rpm < 5) {
-                        rpm = 5;
-                    }
+                 rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                 if (rpm < 5) {
+                 rpm = 5;
+                 }
 
-                }
-                if (speedo > 99) {
-                    speedo = 99;
-                }*/
+                 }
+                 if (speedo > 99) {
+                 speedo = 99;
+                 }*/
 
             } else {
                 //int rr=(int)gui.getRadialSpeedometer().getValue();
-                 
-                
-                    rpm=rpm-ac_value*10;
-                    
-                if(rpm<0){
-                    rpm=0;
-                }                
-                 speedo=(int) (speedo-((33.0/80.0)*rpm));
-                 if(speedo<0){
-                     speedo=0;
-                 }
-                 if (speedo > 0 && speedo < 33) {
-                    if (gear_pos == 2) {
-                        gear_pos--;
-                    }
-                }
-                if (speedo > 34 && speedo < 66) {
-                    if (gear_pos == 3) {
-                        gear_pos--;
-                    }
-                }
-                if (gear_pos < 1) {
-                    gear_pos = 1;
-                }
-                 
-               /* speedo = speedo - 5;
-                rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                if (rpm < 5) {
-                    rpm = 5;
-                }
 
+                rpm = rpm - ac_value * 10;
+p = ac_value * 10;
+                if (rpm < 0) {
+                    rpm = 0;
+                }
+                speedo = (int) (speedo - ((33.0 / 80.0) * p));
                 if (speedo < 0) {
                     speedo = 0;
                 }
@@ -201,10 +208,33 @@ public class AutoMobileManagmentSystem {
                 if (gear_pos < 1) {
                     gear_pos = 1;
                 }
-                if (speedo < 0) {
-                    speedo = 0;
-                }
-*/
+
+                /* speedo = speedo - 5;
+                 rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
+                 if (rpm < 5) {
+                 rpm = 5;
+                 }
+
+                 if (speedo < 0) {
+                 speedo = 0;
+                 }
+                 if (speedo > 0 && speedo < 33) {
+                 if (gear_pos == 2) {
+                 gear_pos--;
+                 }
+                 }
+                 if (speedo > 34 && speedo < 66) {
+                 if (gear_pos == 3) {
+                 gear_pos--;
+                 }
+                 }
+                 if (gear_pos < 1) {
+                 gear_pos = 1;
+                 }
+                 if (speedo < 0) {
+                 speedo = 0;
+                 }
+                 */
             }
             System.out.println(speedo);
             gui.getRadialSpeedometer().setValueAnimated(speedo);
@@ -227,29 +257,54 @@ public class AutoMobileManagmentSystem {
             if (state_engine == true && current_speed > 0) {
                 if (current_speed > 20 && current_speed <= 40) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-
+                    /*rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
+                    if(rpm<0){
+                        rpm=0;
+                    }
+                    System.out.println("000000000000000000000000000"+rpm);
+                     gui.getRadialRPM().setValueAnimated(rpm);
+                    gui.getDisplayRPM().setValueAnimated(rpm);*/
                     if (current_speed == 36 && gear_pos > 1) {
                         //  gui.getDisplayGear().setValue(1);
                     }
                     // gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.01);
                 } else if (current_speed > 40 && current_speed <= 60) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-
+                   /* rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
+                    if(rpm<0){
+                        rpm=0;
+                    }
+                    gui.getRadialRPM().setValueAnimated(rpm);
+                    gui.getDisplayRPM().setValueAnimated(rpm);*/
                     //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.02);
                 } else if (current_speed > 60 && current_speed <= 80) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
+                    /*rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
+                    if(rpm<0){
+                        rpm=0;
+                    }
+                    gui.getRadialRPM().setValueAnimated(rpm);
+                    gui.getDisplayRPM().setValueAnimated(rpm);*/
                     if (current_speed == 66 && gear_pos > 2) {
                         // gui.getDisplayGear().setValue(2);
                     }
 
                 } else if (current_speed > 80 && current_speed <= 100) {
                     gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.01);
-
+                   /* rpm = (((current_speed - current_speed * 0.01) - ((gear_pos - 1) * 33)) * (70 / 33));
+                    System.out.println(rpm);
+                    if(rpm<0){
+                        rpm=0;
+                    }
+                    gui.getRadialRPM().setValueAnimated(rpm);
+                    gui.getDisplayRPM().setValueAnimated(rpm);*/
                     //  gui.getDisplayCrusingSpeed().setValueAnimated(current_speed - current_speed * 0.03);
                 }
             } else {
                 gui.getRadialSpeedometer().setValueAnimated(current_speed - current_speed * 0.02);
-
+               /* rpm = (((current_speed - current_speed * 0.02) - ((gear_pos - 1) * 33)) * (70 / 33));
+                gui.getRadialRPM().setValueAnimated(rpm);
+                gui.getDisplayRPM().setValueAnimated(rpm);*/
             }
         } catch (Exception e) {
         }
@@ -370,7 +425,7 @@ public class AutoMobileManagmentSystem {
                     return dss_gen;
                 } catch (Exception e) {
 
-                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 *0.7 + random(1, 3));
+                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 0.7 + random(1, 3));
                     return dss_gen;
                 }
 
