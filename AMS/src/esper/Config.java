@@ -22,7 +22,6 @@ import events.Maintenace_done;
 import events.PerformEvent;
 import events.RpmEvent;
 import events.SpeedOMeterReading;
-import events.TransmissionGearEvent;
 import events.TripEvent;
 import events.set_Fuel;
 
@@ -44,7 +43,6 @@ public class Config {
         engine.getEPAdministrator().getConfiguration().addEventType(events.Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Fuel_Reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(SpeedOMeterReading.class);
-        engine.getEPAdministrator().getConfiguration().addEventType(TransmissionGearEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(TripEvent.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Calibirator_state_reading.class);
         engine.getEPAdministrator().getConfiguration().addEventType(Drive_shaft_reading.class);
