@@ -217,6 +217,10 @@ public class View_AMS extends javax.swing.JFrame {
         return actuator_label;
     }
 
+    public DisplaySingle getThrotel_display() {
+        return Throtel_display;
+    }
+
     public LightBulb getActo_bulb() {
         return acto_bulb;
     }
@@ -274,6 +278,7 @@ public class View_AMS extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         actuator_label = new javax.swing.JLabel();
+        Throtel_display = new eu.hansolo.steelseries.gauges.DisplaySingle();
         radialFuel = new eu.hansolo.steelseries.gauges.Radial1Lcd();
         radialRPM = new eu.hansolo.steelseries.gauges.Radial4();
         displayCrusingSpeed = new eu.hansolo.steelseries.gauges.DisplaySingle();
@@ -472,6 +477,11 @@ public class View_AMS extends javax.swing.JFrame {
 
         actuator_label.setForeground(new java.awt.Color(204, 204, 204));
 
+        Throtel_display.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        Throtel_display.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.GRAY_LCD);
+        Throtel_display.setUnitString("VLT");
+        Throtel_display.setVerifyInputWhenFocusTarget(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -492,9 +502,12 @@ public class View_AMS extends javax.swing.JFrame {
                                             .addComponent(buttonStopEngine, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lightBulb1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(buttonAccelerate)
-                                    .addComponent(buttonBrake, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
+                                    .addComponent(buttonBrake, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(buttonAccelerate)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Throtel_display, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(52, 52, 52)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(141, 141, 141)
@@ -623,7 +636,9 @@ public class View_AMS extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(Gear_label)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttonAccelerate)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(buttonAccelerate)
+                                    .addComponent(Throtel_display, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
                                 .addComponent(buttonBrake)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -653,7 +668,8 @@ public class View_AMS extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel13)
                                         .addGap(6, 6, 6)
-                                        .addComponent(volt_dislpay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(volt_dislpay, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(acto_bulb, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -1094,6 +1110,7 @@ public class View_AMS extends javax.swing.JFrame {
     private javax.swing.JLabel Gear_label;
     private javax.swing.JButton Increase_cruise;
     private javax.swing.JButton Maintenance_done_button;
+    private eu.hansolo.steelseries.gauges.DisplaySingle Throtel_display;
     private eu.hansolo.lightbulb.LightBulb Tripbulb;
     private eu.hansolo.lightbulb.LightBulb acto_bulb;
     private javax.swing.JLabel actuator_label;

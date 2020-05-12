@@ -231,10 +231,14 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="lightBulb1" min="-2" pref="70" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="buttonAccelerate" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="buttonBrake" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="buttonAccelerate" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="Throtel_display" min="-2" pref="72" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
@@ -411,7 +415,10 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="buttonAccelerate" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="buttonAccelerate" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Throtel_display" min="-2" pref="25" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Component id="buttonBrake" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -447,6 +454,7 @@
                                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="volt_dislpay" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
@@ -782,6 +790,20 @@
             </Property>
           </Properties>
         </Component>
+        <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="Throtel_display">
+          <Properties>
+            <Property name="debugGraphicsOptions" type="int" value="-1"/>
+            <Property name="lcdColor" type="eu.hansolo.steelseries.tools.LcdColor" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="GRAY_LCD"/>
+            </Property>
+            <Property name="unitString" type="java.lang.String" value="VLT"/>
+            <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+            <Property name="useNullLayout" type="boolean" value="true"/>
+          </Layout>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="eu.hansolo.steelseries.gauges.Radial1Lcd" name="radialFuel">
