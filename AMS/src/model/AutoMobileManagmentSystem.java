@@ -870,18 +870,26 @@ public class AutoMobileManagmentSystem {
     public void setCruise_controll_values(double[] cruise_controll_values) {
         this.cruise_controll_values = cruise_controll_values;
     }
-    public void auto_increass_speed()
-    {
-        
+
+    public void auto_increass_speed() {
+
     }
-    
 
     public void setactoutor_state(int state) {
         if (state_engine == true) {
             actoutor_state = state;
             if (state == 2 || state == 3) {
                 gui.getActo_bulb().setOn(true);
-                gui.getActuator_label().setText("Actuator ON");
+                if (state == 2) {
+                    gui.getActuator_label().setText("UP Hill Actuator ON ");
+                    gui.getRadialSpeedometer().setValue( gui.getRadialSpeedometer().getValue()-2);
+                   
+                    
+                } else {
+                    gui.getActuator_label().setText("Down Hill Actuator ON");
+                    gui.getRadialSpeedometer().setValue( gui.getRadialSpeedometer().getValue()+2);
+
+                }
             } else {
                 gui.getActo_bulb().setOn(false);
                 gui.getActuator_label().setText("Actuator OFF");

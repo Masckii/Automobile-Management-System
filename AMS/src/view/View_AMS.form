@@ -185,7 +185,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -465,7 +465,7 @@
                           <Component id="Maintenance_done_button" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -822,7 +822,7 @@
     </Container>
     <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayCrusingSpeed">
       <Properties>
-        <Property name="unitString" type="java.lang.String" value="Km/h"/>
+        <Property name="unitString" type="java.lang.String" value="Ml/h"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -881,7 +881,7 @@
       <Properties>
         <Property name="lcdUnitStringVisible" type="boolean" value="true"/>
         <Property name="title" type="java.lang.String" value="Speed"/>
-        <Property name="unitString" type="java.lang.String" value="km.h"/>
+        <Property name="unitString" type="java.lang.String" value="ML.h"/>
       </Properties>
     </Component>
     <Container class="eu.hansolo.steelseries.gauges.DisplaySingle" name="displayMilesDriven">

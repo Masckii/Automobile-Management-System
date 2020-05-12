@@ -664,7 +664,7 @@ public class View_AMS extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Maintenance_done_button)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         radialFuel.setMaxValue(10.0);
@@ -687,7 +687,7 @@ public class View_AMS extends javax.swing.JFrame {
         radialRPM.setTrackVisible(true);
         radialRPM.setUnitString("X100");
 
-        displayCrusingSpeed.setUnitString("Km/h");
+        displayCrusingSpeed.setUnitString("Ml/h");
 
         digitalRadial1.setTitle("Maintenance");
         digitalRadial1.setUnitString("Time");
@@ -706,7 +706,7 @@ public class View_AMS extends javax.swing.JFrame {
 
         radialSpeedometer.setLcdUnitStringVisible(true);
         radialSpeedometer.setTitle("Speed");
-        radialSpeedometer.setUnitString("km.h");
+        radialSpeedometer.setUnitString("ML.h");
 
         displayMilesDriven.setUnitString("Miles");
 
@@ -868,7 +868,7 @@ public class View_AMS extends javax.swing.JFrame {
                         .addComponent(displaytrip, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
 
         pack();
