@@ -6,7 +6,6 @@
 package esper;
 
 import model.AutoMobileManagmentSystem;
-import model.Calibrator;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -18,7 +17,6 @@ import org.apache.log4j.Logger;
 public class Main {
 
     /**
-     * @param args the command line arguments
      */
     //private Calibrator cal;
     public static AutoMobileManagmentSystem ams = new AutoMobileManagmentSystem();

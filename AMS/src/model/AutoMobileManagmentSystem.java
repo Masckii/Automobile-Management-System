@@ -892,10 +892,12 @@ public class AutoMobileManagmentSystem {
                 if (state == 2) {
                     gui.getActuator_label().setText("UP Hill Actuator ON ");
                     gui.getRadialSpeedometer().setValue(gui.getRadialSpeedometer().getValue() - 2);
+                    gui.getVolt_dislpay().setValueAnimated(0.8);
 
                 } else {
                     gui.getActuator_label().setText("Down Hill Actuator ON");
                     gui.getRadialSpeedometer().setValue(gui.getRadialSpeedometer().getValue() + 2);
+                    gui.getVolt_dislpay().setValueAnimated(1.2);
 
                 }
             } else {
