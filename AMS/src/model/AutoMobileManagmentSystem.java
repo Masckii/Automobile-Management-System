@@ -129,10 +129,15 @@ public class AutoMobileManagmentSystem {
             int speedo = (int) gui.getRadialSpeedometer().getValue();
             if (accelerate == true) {
                 // int rr=(int)gui.getRadialSpeedometer().getValue();
-                rpm=ac_value*10;
-               
-                speedo=speedo+  ((33/80)*(ac_value*10));
-                 
+                if(rpm!=80){
+                rpm=rpm+ac_value*10;
+                if(rpm>80){
+                    rpm=80;
+                }
+                 System.out.println(((33.0/80.0)*(rpm)));
+                speedo = (int) (speedo +  ((33.0/80.0)*(rpm)));
+                 System.out.println(speedo);
+                }
                 /*if (speedo < (gear_pos * 33)) {
 
                     speedo = speedo + 5;
@@ -150,13 +155,13 @@ public class AutoMobileManagmentSystem {
             } else {
                 //int rr=(int)gui.getRadialSpeedometer().getValue();
                  
-                if(rpm>0){
-                    rpm=ac_value*10;
+                
+                    rpm=rpm-ac_value*10;
                     
-                }else{
+                if(rpm<0){
                     rpm=0;
-                }
-                 speedo=speedo-((33/80)*ac_value*10);
+                }                
+                 speedo=(int) (speedo-((33.0/80.0)*rpm));
                  if(speedo<0){
                      speedo=0;
                  }
