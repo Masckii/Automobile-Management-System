@@ -16,26 +16,26 @@ import view.View_AMS;
 public class AutoMobileManagmentSystem {
 
     //--engine
-    private boolean state_engine = false;
+    private boolean state_engine;
     private int current_speed;
-    private boolean cruise_state = false;
-    private int fuel_reading = 0;
-    private int gear_pos = 0;
-    private int trip_start_time = 0;
-    private boolean trip_state = false;
+    private boolean cruise_state;
+    private int fuel_reading;
+    private int gear_pos;
+    private int trip_start_time;
+    private boolean trip_state;
     private static int time_counter_sec = 0;
     private static int time_counter_trip = 0;
     private static int speed_counter_trip = 0;
     private static int average_speed = 0;
     private static int rpm_total = 0;
     private static float distance = 0;
-    private int dreive_shaft_rotation = 0;
+    private int dreive_shaft_rotation;
     private boolean Clabirator_state;
     private static int cruise_value;
     private boolean accelerate;
     private boolean maintainance_state;
-    private static int change_stage = 1;
-    private double rpm = 0;
+    private static int change_stage;
+    private double rpm;
     //-- compunents of our AMS 
     private CruiseController cc;
     private Monitor monitor;
@@ -46,6 +46,7 @@ public class AutoMobileManagmentSystem {
     private model.Timer timer;
     private model.Monitor mon;
     private model.ServiceCompletion ser_com;
+    private SystemStateTracer sst;
     //therad
     //private model.Fuel_Sensor fuel_sensor;
     // private model.Led_light led_light;
@@ -56,12 +57,35 @@ public class AutoMobileManagmentSystem {
 
     public AutoMobileManagmentSystem() {
         //vars
+        state_engine = false;
         Clabirator_state = false;
         cruise_value = 0;
         cruise_state = false;
         maintainance_state = false;
+        average_speed = 0;
         ser_com = ServiceCompletion.SERVICE_INCOMPLETE;
+        Clabirator_state = false;
+        cruise_state = false;
+        fuel_reading = 0;
+        gear_pos = 0;
+        trip_start_time = 0;
+        trip_state = false;
+        dreive_shaft_rotation = 0;
+        change_stage = 1;
+        rpm = 0;
+        current_speed = 0;
         //
+        //table
+        String maintance[] = {"Oil and oil filter change after : ", "Air filter change  : ", "Major service change :  change after : "};
+
+        //GUI
+        gui = new View_AMS();
+        gui.setVisible(true);
+        gui.setLocationRelativeTo(null);
+        gui.getMaintenance_done_button().setVisible(false);
+
+        //
+        //Threads
         cal = new Calibrator(this);
         fs = new Fuel_Sensor(this);
         grs = new Gear_sensor(this);
@@ -69,17 +93,14 @@ public class AutoMobileManagmentSystem {
         dss = new DriveShaftSensor(this);
         mon = new Monitor(this);
         timer = new Timer(this);
-        current_speed = 0;
-        gui = new View_AMS();
-        gui.setVisible(true);
-        gui.setLocationRelativeTo(null);
-        cc.start();
-        cal.start();
-        fs.start();
-        grs.start();
-        timer.start();
-        dss.start();
-        mon.start();
+
+        cc.start();     //1
+        cal.start();    //2
+        fs.start();     //3
+        grs.start();    //4
+        timer.start();  //5
+        dss.start();    //6
+        mon.start();    //7
     }
 
     public void setRpm(double rpm) {
@@ -143,36 +164,6 @@ public class AutoMobileManagmentSystem {
                 if (speedo < 0) {
                     speedo = 0;
                 }
-                /*if (speedo > (gear_pos * 33)) {
-                    speedo = speedo - 5;
-                    if (speedo > 0) {
-                        rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                        if (rpm < 5) {
-                            rpm = 5;
-                        }
-                    }
-
-                }
-                if (gear_pos != 3) {
-                    if (speedo < (gear_pos * 33)) {
-                        speedo = speedo - 5;
-                        gear_pos--;
-                        if (gear_pos < 1) {
-                            gear_pos = 1;
-                        }
-                        if (speedo > 0) {
-                            rpm = ((speedo - ((gear_pos - 1) * 33)) * (70 / 33));
-                            if (rpm < 5) {
-                                rpm = 5;
-                            }
-                        }
-                    }
-                } else {
-                    speedo = speedo - 5;
-                    if (speedo < (gear_pos * 33)) {
-                        gear_pos--;
-                    }
-                }*/
 
             }
             System.out.println(speedo);
@@ -335,11 +326,11 @@ public class AutoMobileManagmentSystem {
                 try {
                     int speed_time = Integer.valueOf(gui.getSpeed_time().getText());
 
-                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 * speed_time + random(1, 3));
+                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 0.7 * speed_time + random(1, 3));
                     return dss_gen;
                 } catch (Exception e) {
 
-                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 * 2 + random(1, 3));
+                    float dss_gen = (float) ((current_speed * 0.05) * (5.0 / 6.0) * 60 *0.7 + random(1, 3));
                     return dss_gen;
                 }
 
@@ -400,7 +391,7 @@ public class AutoMobileManagmentSystem {
                     gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
 
                 } else if (change_stage == 3) {
-                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
+                    gui.getScreen().setText("There is required maintenance ->   Major service change : " + (5000 * change_stage - drav));
 
                 }
             }
@@ -416,7 +407,7 @@ public class AutoMobileManagmentSystem {
                     gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
 
                 } else if (change_stage == 3) {
-                    gui.getScreen().setText("There is required maintenance ->   air filter change : " + (5000 * change_stage - drav));
+                    gui.getScreen().setText("There is required maintenance ->    Major service change : " + (5000 * change_stage - drav));
 
                 }
             }
@@ -439,14 +430,19 @@ public class AutoMobileManagmentSystem {
     public void decrease_fuel() {
 
         try {
+            if (state_engine == true && current_speed > 0) {
+                int x = ((int) gui.getDisplayAvgFuel().getValue() * 10);
+                int distance_1 = (int) distance;
+                int mod = ((distance_1) % x);
 
-            if (distance % 2 == 0) {
-                gui.getRadialFuel().setValue(--fuel_reading);
+                if (mod == 0) {
+                    gui.getRadialFuel().setValue(--fuel_reading);
 
-                distance += distance + 1;
+                    distance = distance + 1;
+                }
             }
+
         } catch (Exception e) {
-            System.out.println("model.AutoMobileManagmentSystem.decrease_fuel()" + e.getMessage());
         }
 
     }
@@ -525,6 +521,18 @@ public class AutoMobileManagmentSystem {
 
     public void setGear_pos(int gear_pos) {
 
+        if (gear_pos == 1) {
+            gui.getGear_label().setText("LOW_GEAR");
+        } else if (gear_pos == 2) {
+            gui.getGear_label().setText("MID_GEAR");
+
+        } else if (gear_pos == 3) {
+            gui.getGear_label().setText("TOP_GEAR");
+
+        } else if (gear_pos == 0) {
+            gui.getGear_label().setText("Clutch");
+
+        }
         if (gear_pos == 3) {
             gui.getLightBulb3().setOn(true);
 
@@ -561,7 +569,7 @@ public class AutoMobileManagmentSystem {
     }
 
     public void accelearate_cruise_value(int gl) {
-        if (state_engine == true && cruise_state == true &&gear_pos==3) {
+        if (state_engine == true && cruise_state == true && gear_pos == 3) {
             if (gl <= 100) {
                 this.cruise_value = gl;
 
