@@ -8,7 +8,7 @@ package events;
 
 /**
  *
- * @author moamen
+ * @author group 7
  */
 public class set_Fuel {
     private int value;

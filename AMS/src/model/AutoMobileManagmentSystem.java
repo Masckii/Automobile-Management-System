@@ -11,7 +11,7 @@ import view.View_AMS;
 
 /**
  *
- * @author Omar Shan
+ * @author group 7
  */
 public class AutoMobileManagmentSystem {
 
