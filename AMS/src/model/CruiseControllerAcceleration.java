@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author Omar Shan
+ * @author group 7
  */
 public enum CruiseControllerAcceleration {
     START_ACCELERATE, STOP_ACCELERATE

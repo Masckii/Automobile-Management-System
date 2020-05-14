@@ -7,8 +7,7 @@ package model;
 
 /**
  *
- * @author Omar Shan
- */
+ * @author group 7 */
 public enum Calibration {
     START_CALIBRATE, STOP_CALIBRATE
 }

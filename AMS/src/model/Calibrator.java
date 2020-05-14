@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Omar Shan
+ * @author group 7
  */
 public class Calibrator extends Thread {
 
